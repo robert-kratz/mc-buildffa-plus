@@ -1,0 +1,14 @@
+## This Plugin was written by Robert Kratz on 11. Mai 2021
+## You need help with setting up the Plugin? Check out my Discord: https://link.rjks.us/support
+
+enabled: true
+database: false
+
+enable-rank-system: false
+enable-tab-rank: false
+enable-chat-rank: false
+display-effect-on-player: false
+display-effect-on-top-while-sneaking: false
+
+permissions:
+  operator: system.game.operator

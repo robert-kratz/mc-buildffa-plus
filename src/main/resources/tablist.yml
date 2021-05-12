@@ -1,0 +1,63 @@
+## This Plugin was written by Robert Kratz on 11. Mai 2021
+## You need help with setting up the Plugin? Check out my Discord: https://link.rjks.us/support
+##
+## The Group with the lowest permission level should be on top, the Group with the highest (example: Admin) should be all at the bottom
+## The Hex color defines the color of the Particle for example: 'ad1100' (DARK_RED)
+## Find a Color Hex Generator on https://www.google.com/search?q=color+picker
+
+Player:
+  permission: system.tab.player
+  color: '&7'
+  tabprefix: '&7'
+  tabsuffix: ''
+  chatformat: "&7Player &8\u2503 &7%playername%&8:&f"
+  hex: b3b3b3
+  defaultRank: true
+VIP:
+  permission: system.tab.vip
+  color: '&d'
+  tabprefix: "&dVIP &8\u2503 &d"
+  tabsuffix: ''
+  chatformat: "&dVIP &8\u2503 &d%playername%&8:&f "
+  hex: FF55FF
+  defaultRank: false
+Builder:
+  permission: system.tab.builder
+  color: '&e'
+  tabprefix: "&eBuilder &8\u2503 &e"
+  tabsuffix: ''
+  chatformat: "&eBuilder &8\u2503 &e%playername%&8:&f "
+  hex: FFFF55
+  defaultRank: false
+Supporter:
+  permission: system.tab.supporter
+  color: '&b'
+  tabprefix: "&bSup &8\u2503 &b"
+  tabsuffix: ''
+  chatformat: "&bSupport &8\u2503 &b%playername%&8:&f "
+  hex: 55FFFF
+  defaultRank: false
+Moderator:
+  permission: system.tab.moderator
+  color: '&c'
+  tabprefix: "&cMod &8\u2503 &c"
+  tabsuffix: ''
+  chatformat: "&cModeration &8\u2503 &c%playername%&8:&f "
+  hex: FF5555
+  defaultRank: false
+Developer:
+  permission: system.tab.developer
+  color: '&9'
+  tabprefix: "&9Dev &8\u2503 &9"
+  tabsuffix: ''
+  chatformat: "&9Developer &8\u2503 &9%playername%&8:&f "
+  hex: 5555FF
+  defaultRank: false
+Admin:
+  permission: system.tab.admin
+  color: '&3'
+  tabprefix: "&3&lAdmin &8\u2503 &3"
+  tabsuffix: ''
+  chatformat: "&3&lAdmin &8\u2503 &3%playername%&8:&f "
+  hex: 00AAAA
+  defaultRank: false

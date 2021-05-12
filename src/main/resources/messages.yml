@@ -1,0 +1,25 @@
+# This Plugin was written by Robert Kratz on 02. Mai 2021
+# You need help with setting up the Plugin? Check out my Discord: https://link.rjks.us/support
+
+no-permission: "&cYou don't have permission to execute this command."
+no-player: "&cYou have to be a player to execute this command."
+
+## These are the messages for setting up a map with /map
+
+map-command-syntax:
+  - "Overview of all Map Commands:"
+  - "- map list"
+  - "- map create [CONFIGNAME] [DISPLAYNAME]"
+  - "- map delete [CONFIGNAME]"
+
+map-command-list-title: "Maps in cache (%amount%)"
+map-command-list-item: "- NAME: %mapname% | FILE: %mapsrc%"
+
+map-command-delete-success: "Deleted Map %mapname% from all configs, it will still exists in the Maps Folder"
+map-command-delete-error: "Unable to loaded map %mapname% because map is not registered"
+
+map-command-create-success: "The Map %mapname% was successfully created."
+map-command-map-not-found: "The Map %mapname% was not found."
+map-command-map-already-exists: "The Map %mapname% already exists"
+map-command-create-set-spawn-after: "Please set the spawnpoint with /map setspawn [MAPNAME] spawn"
+map-command-spawn-set: "You successfully set the spawn %spawn% on map %mapname%"
