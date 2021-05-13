@@ -37,6 +37,7 @@ public class Counter {
                         countdown = duration;
                         Bukkit.getPluginManager().callEvent(new CountDownEndsEvent(countername));
                     }
+                    countdown--;
                 }
             }
         }, 20L, 20L);
@@ -72,4 +73,31 @@ public class Counter {
         return run;
     }
 
+    public static String parseToClockFormat(int totalSecs) {
+        int hours, minutes, seconds;
+        hours = totalSecs / 3600;
+        minutes = (totalSecs % 3600) / 60;
+        seconds = totalSecs % 60;
+
+        String h = hours + "";
+        String m = minutes + "";
+        String s = seconds + "";
+
+        if(h.length() == 1) {
+            h = "0" + h;
+        }
+        if(m.length() == 1) {
+            m = "0" + m;
+        }
+        if(s.length() == 1) {
+            s = "0" + s;
+        }
+
+        String msg = Messages.getString("timer_format")
+                .replaceAll("%hours%", String.valueOf(h))
+                .replaceAll("%minutes%", String.valueOf(m))
+                .replaceAll("%seconds%", String.valueOf(s));
+
+        return msg;
+    }
 }

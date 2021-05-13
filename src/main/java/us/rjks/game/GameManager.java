@@ -1,7 +1,9 @@
 package us.rjks.game;
 
+import us.rjks.utils.Config;
 import us.rjks.utils.Counter;
 import us.rjks.utils.MapManager;
+import us.rjks.utils.Type;
 
 /***************************************************************************
  *
@@ -18,7 +20,7 @@ public class GameManager {
     private boolean setup;
 
     public GameManager() {
-
+        mapchange = new Counter(Type.MAP, Config.getInteger("map-change-counter"));
     }
 
     public MapManager.Map getCurrentMap() {

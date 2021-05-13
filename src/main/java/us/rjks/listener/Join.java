@@ -3,7 +3,11 @@ package us.rjks.listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import us.rjks.game.GameManager;
+import us.rjks.game.Main;
 import us.rjks.utils.Config;
+import us.rjks.utils.MapManager;
+import us.rjks.utils.ScoreBoard;
 import us.rjks.utils.TabList;
 
 /***************************************************************************
@@ -20,6 +24,14 @@ public class Join implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         if (Config.getBoolean("enable-rank-system") && Config.getBoolean("enable-tab-rank")) {
             TabList.setTabList(event.getPlayer());
+        }
+
+        if(Config.getBoolean("show-score-board")) {
+            ScoreBoard.setScoreBoard(event.getPlayer());
+        }
+
+        if (Main.getGame().getCurrentMap() != null) {
+            Main.getGame().getCurrentMap().teleportPlayerToWorld(event.getPlayer());
         }
 
     }

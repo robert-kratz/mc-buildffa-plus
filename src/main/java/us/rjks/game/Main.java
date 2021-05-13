@@ -6,8 +6,12 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 import us.rjks.cmd.Map;
+import us.rjks.cmd.Skip;
 import us.rjks.db.MySQL;
+import us.rjks.listener.Chat;
+import us.rjks.listener.CountDown;
 import us.rjks.listener.Join;
+import us.rjks.listener.Quit;
 import us.rjks.utils.*;
 
 import java.awt.*;
@@ -38,13 +42,20 @@ public class Main extends JavaPlugin {
             if(!getDataFolder().exists()) getDataFolder().mkdirs();
             if(!new File("plugins/" + getName() + "/maps").exists()) new File("plugins/" + getName() + "/maps").mkdirs();
 
-            Config.create();
-            Messages.create();
+            try {
+                Config.create();
+                Messages.create();
+            } catch (Exception e) {
+                Bukkit.getConsoleSender().sendMessage("§c§lATTENTION: THE CONFIG CONTAINS A SYNTAX ERROR:");
+                e.printStackTrace();
+                getPluginLoader().disablePlugin(this);
+            }
+
             MapManager.create();
             TabList.create();
 
-            TabList.loadTabllist();
             MapManager.loadMaps();
+            TabList.loadTablist();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,6 +65,11 @@ public class Main extends JavaPlugin {
             Bukkit.getConsoleSender().sendMessage("§c§lATTENTION: YOU MAY HAVE TO RELOAD YOUR SERVER");
             Bukkit.getConsoleSender().sendMessage("§c§lATTENTION: PLUGIN HAS BEEN DISABLED BECAUSE OF THE CONFIGURATION, CHECK 'config.yml' > enable: false");
             return;
+        }
+
+        if (Config.getBoolean("database")) {
+            MySQL.connect();
+            MySQL.createTable();
         }
 
         loadListeners();
@@ -68,7 +84,7 @@ public class Main extends JavaPlugin {
             System.out.println("[MAP] Loaded " + map.getName() + " as default");
 
             Bukkit.getOnlinePlayers().forEach(player -> {
-                TabList.setTabList(player);
+                player.teleport(getGame().getCurrentMap().getLocation("spawn"));
             });
         }
 
@@ -82,11 +98,20 @@ public class Main extends JavaPlugin {
             }
         }
 
+        getGame().getMapchange().start();
+
         Bukkit.getScheduler().scheduleSyncRepeatingTask(getPlugin(), new Runnable() {
             @Override
             public void run() {
-                Bukkit.getOnlinePlayers().forEach(player -> {
-                    try {
+                try {
+                    Bukkit.getOnlinePlayers().forEach(player -> {
+                        //Actionbar
+                        if (Config.getBoolean("game-action-bar-enabled") && MapManager.getSetUpMap().size() != 0)
+                            TitleManager.sendActionBar(player, Messages.getString("game-action-bar")
+                                    .replaceAll("%currentmap%", getGame().getCurrentMap().getName())
+                                    .replaceAll("%mapcounter%", getGame().getMapchange().getCountdown() + "")
+                                    .replaceAll("%mapcounterformated%", Counter.parseToClockFormat(getGame().getMapchange().getCountdown())));
+
                         if (Config.getBoolean("enable-rank-system") && Config.getBoolean("display-effect-on-player")) {
                             if (player.getGameMode().equals(GameMode.CREATIVE) || player.getGameMode().equals(GameMode.SURVIVAL)) {
                                 Color color = Color.decode("#" + TabList.getRankByPlayer(player).getHex());
@@ -94,16 +119,16 @@ public class Main extends JavaPlugin {
                                 location.setY(location.getY() + 2);
 
                                 if (player.isSneaking() && Config.getBoolean("display-effect-on-top-while-sneaking")) {
-                                    player.getWorld().spigot().playEffect(location, Effect.COLOURED_DUST, 0, 0, (float) color.getRed()/255, (float) color.getGreen()/255, (float) color.getBlue()/255, 1, 0, 300);
+                                    player.getWorld().spigot().playEffect(location, Effect.COLOURED_DUST, 0, 0, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255, 1, 0, 300);
                                 } else {
-                                    player.getWorld().spigot().playEffect(player.getLocation(), Effect.COLOURED_DUST, 0, 0, (float) color.getRed()/255, (float) color.getGreen()/255, (float) color.getBlue()/255, 1, 0, 300);
+                                    player.getWorld().spigot().playEffect(player.getLocation(), Effect.COLOURED_DUST, 0, 0, (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255, 1, 0, 300);
                                 }
                             }
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+                    });
+                } catch (Exception e) {
+                    //e.printStackTrace();
+                }
             }
         }, 1L, 1L);
 
@@ -112,6 +137,8 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         super.onDisable();
+
+        MySQL.disconnect();
 
         for (MapManager.Map maps : MapManager.getMaps()) {
             if (maps.isLoaded()) {
@@ -128,8 +155,16 @@ public class Main extends JavaPlugin {
 
     public void loadListeners() {
         getCommand("map").setExecutor(new Map());
+        getCommand("skip").setExecutor(new Skip());
 
         Bukkit.getPluginManager().registerEvents(new Join(), this);
+        Bukkit.getPluginManager().registerEvents(new Quit(), this);
+        Bukkit.getPluginManager().registerEvents(new Chat(), this);
+        Bukkit.getPluginManager().registerEvents(new CountDown(), this);
+    }
+
+    public static GameManager getGame() {
+        return game;
     }
 
     public static Main getPlugin() {

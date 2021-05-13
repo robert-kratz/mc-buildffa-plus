@@ -4,3 +4,4 @@ author: salty
 main: us.rjks.game.Main
 commands:
   map:
+  skip:

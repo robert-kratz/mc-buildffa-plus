@@ -86,7 +86,6 @@ public class MapManager {
 
     public static ArrayList<Map> getSetUpMap() {
         ArrayList<Map> m = new ArrayList<>();
-        System.out.println(m.size());
         maps.forEach(map -> {
             if(map.getLocation("spawn") != null) {
                 m.add(map);
@@ -160,19 +159,15 @@ public class MapManager {
         }
 
         public Location getLocation(String name) {
-            if (isLoaded()) {
-                if (locscfg.get(getName() + ".spawn."  + name) != null) {
-                    Location loc = new Location(Bukkit.getWorld(getSrc()), 0, 0, 0);
-                    loc.setX(locscfg.getDouble(getName() + ".spawn."  + name + ".x"));
-                    loc.setY(locscfg.getDouble(getName() + ".spawn."  + name + ".y"));
-                    loc.setZ(locscfg.getDouble(getName() + ".spawn."  + name + ".z"));
-                    loc.setYaw((float)locscfg.getDouble(getName() + ".spawn." + name + ".yaw"));
-                    loc.setPitch((float)locscfg.getDouble(getName() + ".spawn." + name + ".pitch"));
-                    loc.setWorld(Bukkit.getWorld(locscfg.getString(getName() + ".spawn." + name + ".world")));
-                    return loc;
-                } else {
-                    return null;
-                }
+            if (locscfg.get(getName() + ".spawn."  + name) != null) {
+                Location loc = new Location(Bukkit.getWorld(getSrc()), 0, 0, 0);
+                loc.setX(locscfg.getDouble(getName() + ".spawn."  + name + ".x"));
+                loc.setY(locscfg.getDouble(getName() + ".spawn."  + name + ".y"));
+                loc.setZ(locscfg.getDouble(getName() + ".spawn."  + name + ".z"));
+                loc.setYaw((float)locscfg.getDouble(getName() + ".spawn." + name + ".yaw"));
+                loc.setPitch((float)locscfg.getDouble(getName() + ".spawn." + name + ".pitch"));
+                loc.setWorld(Bukkit.getWorld(locscfg.getString(getName() + ".spawn." + name + ".world")));
+                return loc;
             } else {
                 return null;
             }
@@ -198,6 +193,7 @@ public class MapManager {
                         setLoaded(true);
                         return true;
                     } catch (IOException e) {
+                        e.printStackTrace();
                         return false;
                     }
                 }
@@ -233,6 +229,7 @@ public class MapManager {
          * */
         public boolean deleteMap() {
             try {
+                Bukkit.unloadWorld(getName(), false);
                 FileUtils.deleteDirectory(new File("plugins/../" + getName()));
                 setLoaded(false);
                 return true;

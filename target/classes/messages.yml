@@ -7,19 +7,54 @@ no-player: "&cYou have to be a player to execute this command."
 ## These are the messages for setting up a map with /map
 
 map-command-syntax:
-  - "Overview of all Map Commands:"
-  - "- map list"
-  - "- map create [CONFIGNAME] [DISPLAYNAME]"
-  - "- map delete [CONFIGNAME]"
+  - "&e&lGAME &r&8\u25CF &7Overview of all Map Commands:"
+  - " &8- &7map list"
+  - " &8- &7map create [CONFIGNAME] [DISPLAYNAME]"
+  - " &8- &7map delete [CONFIGNAME]"
+  - " "
+  - "&e&lGAME &r&8\u25CF &eSupport&8: &7https://link.rjks.us/support"
 
-map-command-list-title: "Maps in cache (%amount%)"
-map-command-list-item: "- NAME: %mapname% | FILE: %mapsrc%"
+map-command-list-title: "&e&lGAME &r&8\u25CF &7Maps in cache (%amount%)"
+map-command-list-item: "&8- &7NAME: %mapname% &8| &7FILE: %mapsrc%"
 
-map-command-delete-success: "Deleted Map %mapname% from all configs, it will still exists in the Maps Folder"
-map-command-delete-error: "Unable to loaded map %mapname% because map is not registered"
+map-command-delete-success: "&e&lGAME &r&8\u25CF &cDeleted Map %mapname% from all configs, it will still exists in the Maps Folder"
+map-command-delete-error: "&e&lGAME &r&8\u25CF &cUnable to loaded map %mapname% because map is not registered"
 
-map-command-create-success: "The Map %mapname% was successfully created."
-map-command-map-not-found: "The Map %mapname% was not found."
-map-command-map-already-exists: "The Map %mapname% already exists"
-map-command-create-set-spawn-after: "Please set the spawnpoint with /map setspawn [MAPNAME] spawn"
-map-command-spawn-set: "You successfully set the spawn %spawn% on map %mapname%"
+map-command-create-success: "&e&lGAME &r&8\u25CF &aThe Map %mapname% was successfully created."
+map-command-map-not-found: "&e&lGAME &r&8\u25CF &cThe Map %mapname% was not found."
+map-command-map-already-exists: "&e&lGAME &r&8\u25CF &cThe Map %mapname% already exists"
+map-command-create-set-spawn-after: "&e&lGAME &r&8\u25CF &aPlease set the spawnpoint with /map setspawn [MAPNAME] spawn"
+map-command-spawn-set: "&e&lGAME &r&8\u25CF &aYou successfully set the spawn %spawn% on map %mapname%"
+
+skip-command-map-skiped-successfully: "&e&lGAME &r&8\u25CF &aYou skipped the countdown"
+skip-command-map-skiped-successfully-broadcast: "&e&lGAME &r&8\u25CF &aThe Player %playername% skipped the map counter"
+skip-command-map-skiped-error: "&e&lGAME &r&8\u25CF &cThe Map is already changing"
+skip-command-map-skiped-wait-until-skip: "&e&lGAME &r&8\u25CF &cYou have to wait until you can skip"
+
+## These are the system messages, all functions can be disabled/enabled in the config.yml
+
+## %mapcounter% is giving back the seconds until the mapchange
+game-action-bar: "&e&lGAME &r&8\u25CF &7Map&8: &e%currentmap% &7Mapchange&8: &e%mapcounterformated%"
+
+map-change-broadcast:
+  - "&e&lGAME &r&8\u25CF &7Next Map: &e%mapname% &7by &e%builder%"
+
+## Be aware, the maximum lines of a scoreboard are > 16 < and you can not have multiple lines of the same value
+score-board-layout-title: "&e&lYOUR-SERVER.COM"
+score-board-layout:
+  - "&e "
+  - "&eKills&8:"
+  - " &8\u25CF &c%kills%"
+  - "&a "
+  - "&eDeaths&8:"
+  - " &8\u25CF &c&c%deaths%"
+  - "&6 "
+  - "&eMap&8:"
+  - " &8\u25CF &e%map%"
+  - "&l "
+
+map-change-main-title: "&a\u2714"
+map-change-sub-title: "&7Next Map: &e%mapname%"
+
+## %hours%, %minutes% and %seconds% are giving back the time
+timer_format: "%minutes%:%seconds%"

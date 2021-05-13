@@ -45,7 +45,7 @@ public class Map implements CommandExecutor {
 
                             map.unloadMap();
                             map.deleteMapFromConfig();
-                            sender.sendMessage(Messages.getString("map-command-delete").replaceAll("%mapname%", args[0]));
+                            sender.sendMessage(Messages.getString("map-command-delete-success").replaceAll("%mapname%", args[0]));
                         } else {
                             sender.sendMessage(Messages.getString("map-command-delete-error").replaceAll("%mapname%", args[1]));
                         }
@@ -60,6 +60,7 @@ public class Map implements CommandExecutor {
                             } else {
                                 sender.sendMessage(Messages.getString("map-command-create-success").replaceAll("%mapname%", args[1]));
 
+                                MapManager.getMapFromName(args[1]).loadMap();
                                 MapManager.getMapFromName(args[1]).teleportPlayerToWorld(((Player) sender).getPlayer());
                                 sender.sendMessage(Messages.getString("map-command-create-set-spawn-after"));
                             }

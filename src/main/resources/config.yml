@@ -4,11 +4,61 @@
 enabled: true
 database: false
 
+## Database Structure
+
+mysql:
+  user: 'root'
+  password: ''
+  host: 'localhost'
+  database: 'game'
+  port: '3306'
+
+## Here you can plug in your own coin system if you have one, just user the same database
+## and define your uuid row and coins row and the plugin will use your coin System
+## NOTICE: ONCE DEFINED, WE DO NOT RECOMMEND CHANGING THESE VALUES!
+
+coins:
+  table: 'game_coins'
+  uuid-row: 'uuid'
+  coins-row: 'coins'
+
+stats:
+  table: 'game_stats'
+  uuid-row: 'uuid'
+  kills-row: 'kills'
+  deaths-row: 'deaths'
+
+## Rank System Config
+
 enable-rank-system: false
 enable-tab-rank: false
 enable-chat-rank: false
 display-effect-on-player: false
 display-effect-on-top-while-sneaking: false
 
+## Ingame Config
+
+game-action-bar-enabled: true
+show-score-board: true
+
+## This requires a minimum of 2 maps in the cache
+map-change-counter-enabled: true
+map-change-counter: 500
+map-change-counter-allow-two-maps-in-a-row: false
+
+map-change-announcement-in-chat:
+  - 30
+  - 10
+  - 5
+  - 3
+  - 2
+  - 1
+
+## If a Player executes the command /skip, the countdown will be set to the set number below
+map-skip-countdown-to: 5
+map-skip-countdown-possible-only-at-second: 100
+
 permissions:
   operator: system.game.operator
+  skip: system.game.cmd.skip
+  always-skip: system.game.cmd.skip.always

@@ -12,6 +12,7 @@ import us.rjks.game.Main;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 
 /***************************************************************************
@@ -27,10 +28,12 @@ public class TabList {
     private static File logs = new File("plugins/" + Main.getPlugin().getName() + "/", "tablist.yml");
     private static YamlConfiguration locscfg = YamlConfiguration.loadConfiguration(logs);
 
+    public static HashMap<Player, Rank> cache = new HashMap<>();
+
     private static Scoreboard scoreboard;
     private static ArrayList<Rank> ranks = new ArrayList<Rank>();
 
-    public static void createNewRank(String name, String permission, String color, String tabprefix, String tabsuffix, String chatformat, String hex, boolean defaultRank) {
+    public static void createNewRank(String name, String permission, String color, String tabprefix, String tabsuffix, String chatformat, String hex, Integer power, boolean defaultRank) {
         locscfg.set(name + ".permission", permission);
         locscfg.set(name + ".color", color);
         locscfg.set(name + ".tabprefix", tabprefix);
@@ -41,7 +44,7 @@ public class TabList {
 
         save();
 
-        new Rank(name, permission, color, tabprefix, tabsuffix, chatformat, hex, defaultRank);
+        new Rank(name, permission, color, tabprefix, tabsuffix, chatformat, hex, power, defaultRank);
     }
 
     public static Rank getDefaultRank() {
@@ -56,6 +59,7 @@ public class TabList {
     public static Rank getRankByName(String name) {
         for (Rank rank : ranks) {
             if (rank.getName().equalsIgnoreCase(name)) {
+                System.out.println(name);
                 return rank;
             }
         }
@@ -64,29 +68,26 @@ public class TabList {
     }
 
     public static Rank getRankByPlayer(Player player) {
-        String team = "";
-
-        for (Rank rank : ranks) {
-            if (player.hasPermission(rank.getPermission())) {
-                team = rank.getName();
-            }
+        if(cache.containsKey(player)) {
+            return cache.get(player);
         }
-
-        if(team.equals("")) team = getDefaultRank().getName();
-
-        return getRankByName(team);
+        System.out.println();
+        if(getDefaultRank() == null) {
+            Main.getPlugin().getLogger().log(Level.WARNING, "THERE IS NOT DEFAULT RANK SET, LOCATE THE tablist.yml AND SET THE DEFAULT ROLE TO default > true");
+        }
+        return getDefaultRank();
     }
 
-    public static void loadTabllist() {
+    public static void loadTablist() {
         scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
 
         for (String rank : locscfg.getConfigurationSection("").getKeys(false)) {
-            System.out.println(rank);
             ranks.add(new Rank(rank));
         }
 
         for (Rank rank : ranks) {
-            Team team = scoreboard.registerNewTeam(rank.getName());
+            System.out.println((100000 - rank.getPower()) + rank.getName());
+            Team team = scoreboard.registerNewTeam((100000 - rank.getPower()) + rank.getName());
             team.setPrefix(ChatColor.translateAlternateColorCodes('&', rank.getTabprefix()));
             team.setSuffix(ChatColor.translateAlternateColorCodes('&', rank.getTabsuffix()));
         }
@@ -94,20 +95,22 @@ public class TabList {
 
     public static synchronized void setTabList(Player player) {
 
-        String team = "";
+        Rank team = null;
 
         for (Rank rank : ranks) {
             if (player.hasPermission(rank.getPermission())) {
-                team = rank.getName();
+                team = rank;
             }
         }
 
         if(getDefaultRank() != null) {
-            if(team.equals("")) team = getDefaultRank().getName();
+            if(team == null) team = getDefaultRank();
 
-            scoreboard.getTeam(team).addEntry(player.getName());
-            player.setDisplayName(scoreboard.getTeam(team).getPrefix() + player.getName() + "§r");
+            scoreboard.getTeam((100000 - team.getPower()) + team.getName()).addEntry(player.getName());
+            player.setDisplayName(scoreboard.getTeam((100000 - team.getPower()) + team.getName()).getPrefix() + player.getName() + "§r");
 
+            cache.remove(player);
+            cache.put(player, team);
             for (Player all : Bukkit.getOnlinePlayers()) {
                 all.setScoreboard(scoreboard);
             }
@@ -120,6 +123,7 @@ public class TabList {
 
         private String name, permission, color, tabprefix, tabsuffix, chatformat, hex;
         private boolean defaultRank;
+        private Integer power;
 
         public Rank(String name) {
             this.name = name;
@@ -129,10 +133,11 @@ public class TabList {
             this.tabsuffix = locscfg.getString(name + ".tabsuffix");
             this.chatformat = locscfg.getString(name + ".chatformat");
             this.hex = locscfg.getString(name + ".hex");
+            this.power = locscfg.getInt(name + ".power");
             this.defaultRank = locscfg.getBoolean(name + ".defaultRank");
         }
 
-        public Rank(String name, String permission, String color, String tabprefix, String tabsuffix, String chatformat, String hex, boolean defaultRank) {
+        public Rank(String name, String permission, String color, String tabprefix, String tabsuffix, String chatformat, String hex, Integer power, boolean defaultRank) {
             this.name = name;
             this.permission = permission;
             this.color = color;
@@ -141,6 +146,7 @@ public class TabList {
             this.chatformat = chatformat;
             this.defaultRank = defaultRank;
             this.hex = hex;
+            this.power = power;
 
             ranks.add(this);
         }
@@ -171,6 +177,10 @@ public class TabList {
 
         public String getTabsuffix() {
             return ChatColor.translateAlternateColorCodes('&', tabsuffix);
+        }
+
+        public Integer getPower() {
+            return power;
         }
 
         public boolean isDefaultRank() {
