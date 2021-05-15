@@ -84,7 +84,7 @@ public class Main extends JavaPlugin {
             System.out.println("[MAP] Loaded " + map.getName() + " as default");
 
             Bukkit.getOnlinePlayers().forEach(player -> {
-                player.teleport(getGame().getCurrentMap().getLocation("spawn"));
+                player.teleport(Main.getGame().getCurrentMap().getRandomLocationCollection("spawn"));
             });
         }
 
@@ -138,7 +138,7 @@ public class Main extends JavaPlugin {
     public void onDisable() {
         super.onDisable();
 
-        MySQL.disconnect();
+        //MySQL.disconnect();
 
         for (MapManager.Map maps : MapManager.getMaps()) {
             if (maps.isLoaded()) {

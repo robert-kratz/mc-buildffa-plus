@@ -84,10 +84,15 @@ public class MapManager {
         }
     }
 
+    /**
+     * TO MY FUTURE ME: HERE YOU CAN DEFINE THE PROPERTIES FOR A SETUP MAP
+     * THIS COULD BE INCLUDING SPAWNPOINTS, COLLECTION OF SPAWNPOINTS OR PROPS
+     * failed to find this snipped counter: 1
+     * */
     public static ArrayList<Map> getSetUpMap() {
         ArrayList<Map> m = new ArrayList<>();
         maps.forEach(map -> {
-            if(map.getLocation("spawn") != null) {
+            if(map.getAmountOfSpawnCollection("spawn") > 0) {
                 m.add(map);
             }
         });
@@ -147,6 +152,56 @@ public class MapManager {
             save();
         }
 
+        /**
+         * SPAWN COLLECTION
+         * */
+        public int getAmountOfSpawnCollection(String name) {
+            int i = 0;
+            try {
+                for (String elements : locscfg.getConfigurationSection(getName() + ".spawn").getKeys(false)) {
+                    if (elements.startsWith(name)) {
+                        i++;
+                    }
+                }
+            } catch (Exception e) {}
+            return i;
+        }
+
+        public void setLocationCollection(Location location, String name) {
+            int amount = getAmountOfSpawnCollection(name);
+
+            locscfg.set(getName() + ".spawn." + name + "-" + amount + ".x", Double.valueOf(location.getX()));
+            locscfg.set(getName() + ".spawn." + name + "-" + amount +  ".y", Double.valueOf(location.getY()));
+            locscfg.set(getName() + ".spawn." + name + "-" + amount +  ".z", Double.valueOf(location.getZ()));
+            locscfg.set(getName() + ".spawn." + name + "-" + amount +  ".yaw", Float.valueOf(location.getYaw()));
+            locscfg.set(getName() + ".spawn." + name + "-" + amount +  ".pitch", Float.valueOf(location.getPitch()));
+            locscfg.set(getName() + ".spawn." + name + "-" + amount +  ".world", getSrc());
+
+            save();
+        }
+
+        public ArrayList<Location> getLocationCollection(String name) {
+            ArrayList<Location> locations = new ArrayList<>();
+            for (int i = 0; i < getAmountOfSpawnCollection(name); i++) {
+                locations.add(getLocation(name + "-" + i));
+            }
+            return locations;
+        }
+
+        public Location getRandomLocationCollection(String name) {
+            ArrayList<Location> locations = getLocationCollection(name);
+            return locations.get(new Random().nextInt(locations.size()));
+        }
+
+        public void teleportPlayerToRandomLocationCollection(Player player, String name) {
+            ArrayList<Location> locations = getLocationCollection(name);
+            Location location = locations.get(new Random().nextInt(locations.size()));
+            player.teleport(location);
+        }
+
+        /**
+         * STATIC SPAWN
+         * */
         public void setLocation(Location location, String name) {
             locscfg.set(getName() + ".spawn." + name + ".x", Double.valueOf(location.getX()));
             locscfg.set(getName() + ".spawn." + name + ".y", Double.valueOf(location.getY()));
@@ -173,7 +228,11 @@ public class MapManager {
             }
         }
 
-        /*
+        public void deleteLocation(String name) {
+            locscfg.set(getName() + ".spawn." + name, null);
+        }
+
+        /**
          * LOADED WORLD FROM CACHE
          * */
         public boolean loadMap() {

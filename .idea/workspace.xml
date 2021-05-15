@@ -10,14 +10,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4b5b537-0bbe-4e23-b65d-c91b80da99e5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/us/rjks/event/InventoryActionEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Click.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/InventoryManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/inventory.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/cmd/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/cmd/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/event/InventoryActionEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/game/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Click.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/listener/CountDown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/CountDown.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Join.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Join.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/utils/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/utils/Counter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/Counter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/utils/InventoryManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/utils/MapManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/MapManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/inventory.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/inventory.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/inventory.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/messages.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

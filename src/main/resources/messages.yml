@@ -23,7 +23,7 @@ map-command-delete-error: "&e&lGAME &r&8\u25CF &cUnable to loaded map %mapname% 
 map-command-create-success: "&e&lGAME &r&8\u25CF &aThe Map %mapname% was successfully created."
 map-command-map-not-found: "&e&lGAME &r&8\u25CF &cThe Map %mapname% was not found."
 map-command-map-already-exists: "&e&lGAME &r&8\u25CF &cThe Map %mapname% already exists"
-map-command-create-set-spawn-after: "&e&lGAME &r&8\u25CF &aPlease set the spawnpoint with /map setspawn [MAPNAME] spawn"
+map-command-create-set-spawn-after: "&e&lGAME &r&8\u25CF &aPlease set the spawnpoint with &f/map setspawn [MAPNAME] spawn&a, you can also add multiple spawns by executing the same command again. The player will then be send to a random spawn"
 map-command-spawn-set: "&e&lGAME &r&8\u25CF &aYou successfully set the spawn %spawn% on map %mapname%"
 
 skip-command-map-skiped-successfully: "&e&lGAME &r&8\u25CF &aYou skipped the countdown"
@@ -36,6 +36,7 @@ skip-command-map-skiped-wait-until-skip: "&e&lGAME &r&8\u25CF &cYou have to wait
 ## %mapcounter% is giving back the seconds until the mapchange
 game-action-bar: "&e&lGAME &r&8\u25CF &7Map&8: &e%currentmap% &7Mapchange&8: &e%mapcounterformated%"
 
+map-changes-in-broadcast: "&e&lGAME &r&8\u25CF &aThe Map changes in &seconds& seconds"
 map-change-broadcast:
   - "&e&lGAME &r&8\u25CF &7Next Map: &e%mapname% &7by &e%builder%"
 

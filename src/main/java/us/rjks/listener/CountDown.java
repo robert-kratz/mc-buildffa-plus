@@ -61,7 +61,7 @@ public class CountDown implements Listener {
 
                 Bukkit.getOnlinePlayers().forEach(player -> {
                     TitleManager.sendTitle(player, Messages.getString("map-change-main-title").replaceAll("%mapname%", finalMap.getName()).replaceAll("%builder%", finalMap.getAuthor()), Messages.getString("map-change-sub-title").replaceAll("%mapname%", finalMap.getName()).replaceAll("%builder%", finalMap.getAuthor()));
-                    player.teleport(Main.getGame().getCurrentMap().getLocation("spawn"));
+                    player.teleport(Main.getGame().getCurrentMap().getRandomLocationCollection("spawn"));
                 });
             }
         }
@@ -70,7 +70,7 @@ public class CountDown implements Listener {
     @EventHandler
     public void onCountDownTime(CountDownTimeEvent event) {
         if (event.getType().equals(Type.MAP)) {
-
+            Bukkit.broadcastMessage(Messages.getString("map-changes-in-broadcast").replaceAll("&seconds&", event.getTime() + ""));
         }
     }
 

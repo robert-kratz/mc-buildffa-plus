@@ -74,10 +74,10 @@ public class Map implements CommandExecutor {
                             sender.sendMessage(Messages.getString("map-command-map-already-exists").replaceAll("%mapname%", args[1]));
                         }
                     } else if(args[0].equalsIgnoreCase("setspawn")) {
-                        if(MapManager.getMapFromName(args[1]) != null) {
+                        if(MapManager.getMapFromName(args[1]) != null && ((Player) sender).getWorld().getName().equalsIgnoreCase(MapManager.getMapFromName(args[1]).getSrc())) {
                             MapManager.Map map = MapManager.getMapFromName(args[1]);
 
-                            map.setLocation(((Player) sender).getLocation(), args[2]);
+                            map.setLocationCollection(((Player) sender).getLocation(), args[2]);
                             sender.sendMessage(Messages.getString("map-command-spawn-set").replaceAll("%mapname%", args[1]).replaceAll("%spawn%", args[2]));
                         } else {
                             sender.sendMessage(Messages.getString("map-command-map-not-found").replaceAll("%mapname%", args[1]).replaceAll("%spawn%", args[2]));

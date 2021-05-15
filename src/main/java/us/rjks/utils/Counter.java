@@ -30,9 +30,11 @@ public class Counter {
         counter = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
             public void run() {
                 if (isRunning()) {
-                    if (countdown == 30 || countdown == 10 || countdown == 5 || countdown == 3 || countdown == 2 || countdown == 1) {
-                        Bukkit.getPluginManager().callEvent(new CountDownTimeEvent(countername, countdown));
-                    }
+                    Config.getIntegerList("map-change-announcement-in-chat").forEach(integer -> {
+                        if(countdown == integer) {
+                            Bukkit.getPluginManager().callEvent(new CountDownTimeEvent(countername, countdown));
+                        }
+                    });
                     if (countdown == 0) {
                         countdown = duration;
                         Bukkit.getPluginManager().callEvent(new CountDownEndsEvent(countername));

@@ -1,7 +1,7 @@
 ## This Plugin was written by Robert Kratz on 11. Mai 2021
 ## You need help with setting up the Plugin? Check out my Discord: https://link.rjks.us/support
 
-enabled: true
+enabled: false
 database: false
 
 ## Database Structure
@@ -47,6 +47,10 @@ map-change-counter: 500
 map-change-counter-allow-two-maps-in-a-row: false
 
 map-change-announcement-in-chat:
+  - 500
+  - 250
+  - 100
+  - 50
   - 30
   - 10
   - 5

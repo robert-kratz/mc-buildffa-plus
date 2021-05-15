@@ -70,6 +70,15 @@ public class Config {
         return null;
     }
 
+    public static ArrayList<Integer> getIntegerList(String name) {
+        try {
+            return new ArrayList<Integer>(locscfg.getIntegerList(name));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static boolean create() {
         if(!logs.exists()) {
             try {
