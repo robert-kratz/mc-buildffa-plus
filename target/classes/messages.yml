@@ -40,7 +40,7 @@ map-change-broadcast:
   - "&e&lGAME &r&8\u25CF &7Next Map: &e%mapname% &7by &e%builder%"
 
 ## Be aware, the maximum lines of a scoreboard are > 16 < and you can not have multiple lines of the same value
-score-board-layout-title: "&e&lYOUR-SERVER.COM"
+score-board-layout-title: "&6&lYOUR-SERVER.COM"
 score-board-layout:
   - "&e "
   - "&eKills&8:"

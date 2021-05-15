@@ -31,7 +31,7 @@ public class Join implements Listener {
         }
 
         if (Main.getGame().getCurrentMap() != null) {
-            Main.getGame().getCurrentMap().teleportPlayerToWorld(event.getPlayer());
+            event.getPlayer().teleport(Main.getGame().getCurrentMap().getLocation("spawn"));
         }
 
     }

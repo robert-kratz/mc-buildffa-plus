@@ -1,0 +1,22 @@
+{
+  "inventories:": [
+    {
+      "name": "kit",
+      "rows": 5,
+      "actions": [
+        {
+          "display": "&eSettings",
+          "action": ""
+        }
+      ],
+      "items": [
+        {
+          "slot": 0,
+          "item": {
+
+          }
+        }
+      ]
+    }
+  ]
+}

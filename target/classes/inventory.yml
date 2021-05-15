@@ -1,0 +1,11 @@
+## If you don't know what this is doing, we would recommend you to do not change anything in here
+
+kit-inv:
+  name: "&eKits"
+  rows: 5
+  placeholder:
+    -
+  actions:
+    -
+  items:
+    -

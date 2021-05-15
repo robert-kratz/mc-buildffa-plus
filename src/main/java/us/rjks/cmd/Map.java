@@ -1,10 +1,15 @@
 package us.rjks.cmd;
 
+import org.apache.commons.lang.enums.EnumUtils;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import us.rjks.utils.Config;
 import us.rjks.utils.ItemBuilder;
 import us.rjks.utils.MapManager;
@@ -42,7 +47,6 @@ public class Map implements CommandExecutor {
                     if(args[0].equalsIgnoreCase("delete")) {
                         if(MapManager.getMapFromName(args[1]) != null) {
                             MapManager.Map map = MapManager.getMapFromName(args[1]);
-
                             map.unloadMap();
                             map.deleteMapFromConfig();
                             sender.sendMessage(Messages.getString("map-command-delete-success").replaceAll("%mapname%", args[0]));
@@ -54,7 +58,9 @@ public class Map implements CommandExecutor {
                 } else if(args.length == 3) {
                     if(args[0].equalsIgnoreCase("create")) {
                         if(MapManager.getMapFromName(args[1]) == null) {
-                            boolean ex = MapManager.createMap(args[1], args[2], new ItemBuilder(Material.SUGAR, args[2]).checkout(), "none", "This Map was loaded from " + sender.getName());
+                            ItemStack itemStack = new ItemBuilder(Material.IRON_SWORD, args[2]).setDamage((short) 3).setLore("Hello World").checkout();
+                            itemStack.addEnchantment(Enchantment.LOOT_BONUS_MOBS, 1);
+                            boolean ex = MapManager.createMap(args[1], args[2], itemStack, "none", "This Map was loaded from " + sender.getName());
                             if(!ex) {
                                 sender.sendMessage(Messages.getString("map-command-map-not-found").replaceAll("%mapname%", args[1]));
                             } else {
