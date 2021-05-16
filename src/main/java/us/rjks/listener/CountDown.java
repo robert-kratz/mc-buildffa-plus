@@ -30,17 +30,23 @@ public class CountDown implements Listener {
                 Main.getGame().getCurrentMap().unloadMap();
                 Main.getGame().getCurrentMap().deleteMap();
 
-                MapManager.Map map = MapManager.getRandomMap();
-                if(MapManager.getSetUpMap().size() == 1 && !Config.getBoolean("map-change-counter-allow-two-maps-in-a-row")) {
-                    Bukkit.getLogger().log(Level.WARNING, "THE PROPERTY: map-change-counter-allow-two-maps-in-a-row in CONFIG.YML IS SET TO FALSE BUT ONLY ONE MAP EXISTS: RESULT: IGNORED CONFIG");
-                } else {
-                    if(!Config.getBoolean("map-change-counter-allow-two-maps-in-a-row")) {
-                        MapManager.Map tmp = MapManager.getRandomMap();
-                        while (Main.getGame().getCurrentMap().getName().equalsIgnoreCase(tmp.getName())) {
-                            tmp = MapManager.getRandomMap();
+                MapManager.Map map = null;
+                if(Main.getGame().getForcemap() == null) {
+                    map = MapManager.getRandomMap();
+                    if(MapManager.getSetUpMap().size() == 1 && !Config.getBoolean("map-change-counter-allow-two-maps-in-a-row")) {
+                        Bukkit.getLogger().log(Level.WARNING, "THE PROPERTY: map-change-counter-allow-two-maps-in-a-row in CONFIG.YML IS SET TO FALSE BUT ONLY ONE MAP EXISTS: RESULT: IGNORED CONFIG");
+                    } else {
+                        if(!Config.getBoolean("map-change-counter-allow-two-maps-in-a-row")) {
+                            MapManager.Map tmp = MapManager.getRandomMap();
+                            while (Main.getGame().getCurrentMap().getName().equalsIgnoreCase(tmp.getName())) {
+                                tmp = MapManager.getRandomMap();
+                            }
+                            map = tmp;
                         }
-                        map = tmp;
                     }
+                } else {
+                    map = Main.getGame().getForcemap();
+                    Main.getGame().setForcemap(null);
                 }
 
                 map.loadMap();
@@ -53,9 +59,9 @@ public class CountDown implements Listener {
                             .replaceAll("%builder%", finalMap.getAuthor()));
                 });
 
-                Bukkit.getOnlinePlayers().forEach(player -> {
+                Bukkit.getOnlinePlayers().forEach(p -> {
                     if(Config.getBoolean("show-score-board")) {
-                        ScoreBoard.setScoreBoard(player);
+                        Main.getGame().getScoreBoard().setScoreBoard(p);
                     }
                 });
 

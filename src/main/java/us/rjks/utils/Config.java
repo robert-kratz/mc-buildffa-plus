@@ -3,9 +3,14 @@ package us.rjks.utils;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import us.rjks.game.Main;
 
 import java.io.File;
@@ -59,6 +64,34 @@ public class Config {
             e.printStackTrace();
         }
         return 0.0;
+    }
+
+    public static ArrayList<ItemStack> getItemStackList(String name) {
+        try {
+            ArrayList<ItemStack> stacks = new ArrayList<>();
+
+            ((ArrayList<ItemStack>)locscfg.get(name)).forEach(itemStack -> {
+                String display = "";
+                if(itemStack.getItemMeta() != null && itemStack.getItemMeta().getDisplayName() != null) {
+                    display = itemStack.getItemMeta().getDisplayName();
+                }
+                ItemBuilder itemBuilder = new ItemBuilder(itemStack.getType(), ChatColor.translateAlternateColorCodes('&', display));
+                stacks.add(itemBuilder.checkout());
+            });
+            return stacks;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static ArrayList<PotionEffect> getPotionEffectList(String name) {
+        try {
+            return new ArrayList<PotionEffect>((ArrayList<PotionEffect>)locscfg.get(name));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static ArrayList<String> getStringList(String name) {

@@ -1,7 +1,9 @@
-name: gamemanager
+name: sgffa-plus
 version: 1.0
 author: salty
 main: us.rjks.game.Main
 commands:
   map:
   skip:
+  stats:
+  forcemap:

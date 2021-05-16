@@ -4,6 +4,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 import us.rjks.utils.Config;
+import us.rjks.utils.KitManager;
+import us.rjks.utils.Messages;
 import us.rjks.utils.TabList;
 
 import java.util.List;
@@ -23,6 +25,14 @@ public class Quit implements Listener {
         if (Config.getBoolean("enable-rank-system") && Config.getBoolean("enable-tab-rank")) {
             TabList.cache.remove(event.getPlayer());
         }
+
+        if(Config.getBoolean("enable-player-leaves-message")) {
+            event.setQuitMessage(Messages.getString("player-leaves-message").replaceAll("%player%", event.getPlayer().getName()));
+        }
+
+        event.getPlayer().getInventory().clear();
+        event.getPlayer().setFoodLevel(30);
+        event.getPlayer().setLevel(0);
     }
 
 }

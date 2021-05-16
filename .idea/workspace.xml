@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="game" />
+      <artifact name="sgffa" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,23 +10,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4b5b537-0bbe-4e23-b65d-c91b80da99e5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/us/rjks/cmd/Forcemap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/us/rjks/db/UUIDFetcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Build.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Damage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Death.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Interact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/game.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/sgffa.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/cmd/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/cmd/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/event/InventoryActionEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/cmd/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/cmd/Stats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/db/Coins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/db/Coins.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/db/MySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/db/MySQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/db/Stats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/db/Stats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/game/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/game/GameManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/game/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Click.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/listener/CountDown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/CountDown.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Join.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Join.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Quit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Quit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/utils/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/utils/Counter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/Counter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/utils/InventoryManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/utils/KitManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/KitManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/utils/MapManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/MapManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/utils/ScoreBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/ScoreBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/inventory.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/config.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/messages.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +184,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1619369947952" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.20595238" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />

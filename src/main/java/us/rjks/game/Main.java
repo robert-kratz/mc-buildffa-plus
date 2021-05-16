@@ -5,13 +5,12 @@ import org.bukkit.Effect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
+import us.rjks.cmd.Forcemap;
 import us.rjks.cmd.Map;
 import us.rjks.cmd.Skip;
+import us.rjks.cmd.Stats;
 import us.rjks.db.MySQL;
-import us.rjks.listener.Chat;
-import us.rjks.listener.CountDown;
-import us.rjks.listener.Join;
-import us.rjks.listener.Quit;
+import us.rjks.listener.*;
 import us.rjks.utils.*;
 
 import java.awt.*;
@@ -51,6 +50,9 @@ public class Main extends JavaPlugin {
                 getPluginLoader().disablePlugin(this);
             }
 
+            KitManager.create();
+            KitManager.loadKits();
+
             MapManager.create();
             TabList.create();
 
@@ -75,13 +77,15 @@ public class Main extends JavaPlugin {
         loadListeners();
 
         if(MapManager.getSetUpMap().size() == 0) {
-            System.out.println("§c§lATTENTION: THERE ARE NOT SETUP MAPS, PLUGIN IS SETUP MODE");
+            Bukkit.broadcastMessage("§c§lATTENTION: THERE ARE NOT SETUP MAPS, PLUGIN IS SETUP MODE");
+            Bukkit.getConsoleSender().sendMessage("§c§lATTENTION: THERE ARE NOT SETUP MAPS, PLUGIN IS SETUP MODE");
             game.setSetup(true);
         } else {
             MapManager.Map map = MapManager.getRandomMap();
             map.loadMap();
             game.setCurrentMap(map);
             System.out.println("[MAP] Loaded " + map.getName() + " as default");
+            getGame().getMapchange().start();
 
             Bukkit.getOnlinePlayers().forEach(player -> {
                 player.teleport(Main.getGame().getCurrentMap().getRandomLocationCollection("spawn"));
@@ -97,8 +101,6 @@ public class Main extends JavaPlugin {
                 System.out.println("§c§lATTENTION: YOU HAVE NOT DEFINED ANY DEFAULT RANK");
             }
         }
-
-        getGame().getMapchange().start();
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(getPlugin(), new Runnable() {
             @Override
@@ -155,11 +157,17 @@ public class Main extends JavaPlugin {
 
     public void loadListeners() {
         getCommand("map").setExecutor(new Map());
+        getCommand("forcemap").setExecutor(new Forcemap());
+        getCommand("stats").setExecutor(new Stats());
         getCommand("skip").setExecutor(new Skip());
 
         Bukkit.getPluginManager().registerEvents(new Join(), this);
+        Bukkit.getPluginManager().registerEvents(new Interact(), this);
         Bukkit.getPluginManager().registerEvents(new Quit(), this);
         Bukkit.getPluginManager().registerEvents(new Chat(), this);
+        Bukkit.getPluginManager().registerEvents(new Build(), this);
+        Bukkit.getPluginManager().registerEvents(new Death(), this);
+        Bukkit.getPluginManager().registerEvents(new Damage(), this);
         Bukkit.getPluginManager().registerEvents(new CountDown(), this);
     }
 

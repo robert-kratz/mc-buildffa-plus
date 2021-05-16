@@ -197,6 +197,18 @@ public class MapManager {
             ArrayList<Location> locations = getLocationCollection(name);
             Location location = locations.get(new Random().nextInt(locations.size()));
             player.teleport(location);
+
+            if(Config.getBoolean("enable-spawn-protection")) {
+                Main.getGame().spawnProtection.remove(player);
+                Main.getGame().spawnProtection.add(player);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
+                    @Override
+                    public void run() {
+                        Main.getGame().spawnProtection.remove(player);
+                        player.sendMessage(Messages.getString("player-spawnprotection-ends"));
+                    }
+                }, Config.getInteger("spawn-protection-duration") * 20);
+            }
         }
 
         /**

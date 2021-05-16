@@ -16,11 +16,11 @@ import java.sql.SQLException;
 
 public class Coins {
 
-    private static String uuidrow = Config.getString("coins.uuid-row"), coinsrow = Config.getString("coins.uuid-row"), table = Config.getString("coins.table");
+    private static String uuidrow = Config.getString("coins.uuid-row"), coinsrow = Config.getString("coins.coins-row"), table = Config.getString("coins.table");
 
     public static void createUser(String uuid) {
         if(Config.getBoolean("database")) {
-            MySQL.update("INSERT INTO discord_connector(" + uuidrow + ", " + coinsrow + ", date) VALUES ('"
+            MySQL.update("INSERT INTO " + table + "(" + uuidrow + ", " + coinsrow + ", date) VALUES ('"
                     + uuid + "','"
                     + 0 + "','"
                     + System.currentTimeMillis() + "')");
@@ -31,6 +31,18 @@ public class Coins {
         if(Config.getBoolean("database")) {
             MySQL.update("DELETE FROM " + table + " WHERE " + uuidrow + "='" + uuid + "'");
         }
+    }
+
+    public static boolean userExists(String uuid) {
+        if(Config.getBoolean("database")) {
+            ResultSet rs = MySQL.getResult("SELECT * FROM " + table + " WHERE " + uuidrow + "='" + uuid + "'");
+            try {
+                return rs.next();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 
     public static int getCoins(String uuid) {
@@ -55,7 +67,9 @@ public class Coins {
 
     public static void removeCoins(String uuid, int amount) {
         if(Config.getBoolean("database")) {
-            setCoins(uuid, getCoins(uuid) - amount);
+            if((getCoins(uuid) - amount) >= 0) {
+                setCoins(uuid, getCoins(uuid) - amount);
+            }
         }
     }
 

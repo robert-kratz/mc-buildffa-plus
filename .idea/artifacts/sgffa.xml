@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="game">
-    <output-path>$PROJECT_DIR$/../../bungeecord/servers/buildserver/plugins</output-path>
-    <root id="archive" name="game.jar">
+  <artifact type="jar" name="sgffa">
+    <output-path>$PROJECT_DIR$/../../bungeecord/servers/sgffa/plugins</output-path>
+    <root id="archive" name="sgffa.jar">
       <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
       <element id="module-output" name="mc-static-game-manager-1.8" />
       <element id="library" level="project" name="Maven: com.google.guava:guava:17.0" />

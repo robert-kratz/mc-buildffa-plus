@@ -58,7 +58,8 @@ public class MySQL {
 
         if(isConnected()) {
             try {
-                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS " + Config.getString("coins.table") + " (" + Config.getString("coins.uuid-row") + " VARCHAR(255), " + Config.getString("coins.table") + " VARCHAR(255), date VARCHAR(255))");
+                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS " + Config.getString("coins.table") + " (" + Config.getString("coins.uuid-row") + " VARCHAR(255), " + Config.getString("coins.coins-row") + " VARCHAR(255), date VARCHAR(255))");
+                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS " + Config.getString("stats.table") + " (" + Config.getString("stats.uuid-row") + " VARCHAR(255), " + Config.getString("stats.kills-row") + " VARCHAR(255), " + Config.getString("stats.deaths-row") + " VARCHAR(255), date VARCHAR(255))");
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

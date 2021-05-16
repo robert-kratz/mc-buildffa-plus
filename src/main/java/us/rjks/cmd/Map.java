@@ -10,13 +10,9 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import us.rjks.utils.Config;
-import us.rjks.utils.ItemBuilder;
-import us.rjks.utils.MapManager;
-import us.rjks.utils.Messages;
+import us.rjks.utils.*;
 
 /***************************************************************************
- *
  *  Urheberrechtshinweis
  *  Copyright Ⓒ Robert Kratz 2021
  *  Erstellt: 11.05.2021 / 17:31
@@ -41,6 +37,9 @@ public class Map implements CommandExecutor {
                         MapManager.getMaps().forEach(map -> {
                             sender.sendMessage(Messages.getString("map-command-list-item").replaceAll("%mapname%", map.getName()).replaceAll("%mapsrc%", map.getSrc()));
                         });
+                    } else if(args[0].equalsIgnoreCase("saveStartInv")) {
+                        sender.sendMessage(Messages.getString("map-command-kit-saved").replaceAll("%amount%", MapManager.getMaps().size() + ""));
+                        KitManager.saveKit("startInv", ((Player) sender), new ItemBuilder(Material.CHAINMAIL_CHESTPLATE, "").checkout(), "");
                     }
                     return true;
                 } else if(args.length == 2) {

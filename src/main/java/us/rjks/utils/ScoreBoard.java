@@ -17,7 +17,7 @@ import us.rjks.game.Main;
 
 public class ScoreBoard {
 
-    public static void setScoreBoard(Player player) {
+    public void setScoreBoard(Player player) {
 
         Scoreboard scoreboard = new Scoreboard();
         ScoreboardObjective obj = scoreboard.registerObjective("zagd", IScoreboardCriteria.b);
@@ -36,7 +36,7 @@ public class ScoreBoard {
                     .replaceAll("%kills%", Stats.getKills(player.getUniqueId().toString()) + "")
                     .replaceAll("%deaths%", Stats.getDeaths(player.getUniqueId().toString()) + "")
                     .replaceAll("%map%", Main.getGame().getCurrentMap().getName())
-                    .replaceAll("%rank%", "0"));
+                    .replaceAll("%rank%", Stats.getRank(player.getUniqueId().toString()) + ""));
 
             score.setScore(Messages.getStringList("score-board-layout").size() - Messages.getStringList("score-board-layout").indexOf(element));
             PacketPlayOutScoreboardScore packetPlayOutScoreboardScore = new PacketPlayOutScoreboardScore(score);
@@ -44,7 +44,7 @@ public class ScoreBoard {
         });
     }
 
-    private static void sendPacket(Packet packet, Player p) {
+    private void sendPacket(Packet packet, Player p) {
         ((CraftPlayer)p).getHandle().playerConnection.sendPacket(packet);
     }
 
