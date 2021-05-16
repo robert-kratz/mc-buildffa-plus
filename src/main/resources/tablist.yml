@@ -12,7 +12,7 @@ Player:
   tabsuffix: ''
   chatformat: "&7Player &8\u25CF &7%playername%&8:&f"
   hex: b3b3b3
-  power: 0
+  power: 5
   defaultRank: true
 VIP:
   permission: system.tab.vip

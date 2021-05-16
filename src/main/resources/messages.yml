@@ -66,7 +66,7 @@ game-action-bar: "&e&lSGFFA &r&8\u25CF &7Map&8: &e%currentmap% &7Mapchange&8: &e
 player-gets-coins: "&e&lSGFFA &r&8\u25CF &a+ %amount% Coins"
 player-lose-coins: "&e&lSGFFA &r&8\u25CF &c- %amount% Coins"
 
-player-welcome-message: "&e&lSGFFA &r&8\u25CF &4Teaming &cis not allowed, ad will be punished with a &4ban"
+player-welcome-message: "&e&lSGFFA &r&8\u25CF &4Teaming &cis not allowed, is will be punished with a &4ban"
 
 player-killstreak-broadcast:
   - " "

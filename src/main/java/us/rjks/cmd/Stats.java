@@ -25,14 +25,14 @@ public class Stats implements CommandExecutor {
         if(sender instanceof Player) {
             if(Config.getBoolean("enable-stats-system")) {
                 final int kills = us.rjks.db.Stats.getKills(((Player) sender).getUniqueId().toString()), deaths = us.rjks.db.Stats.getDeaths(((Player) sender).getUniqueId().toString());
-                int kd = 0;
+                double kd = 0;
 
                 try {
                     kd = kills / deaths;
                 } catch (Exception e) {
 
                 }
-                final int kkd = kd;
+                final double kkd = kd;
 
                 Messages.getStringList("stats-command-show").forEach(s1 -> {
                     sender.sendMessage(s1.replaceAll("%player%", sender.getName()).replaceAll("%kills%", kills + "").replaceAll("%deaths%", deaths + "").replaceAll("%kd%", kkd + "").replaceAll("%ranking%", us.rjks.db.Stats.getRank(((Player) sender).getUniqueId().toString()) + ""));
