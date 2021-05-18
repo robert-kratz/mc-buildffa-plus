@@ -87,12 +87,12 @@ public class MapManager {
     /**
      * TO MY FUTURE ME: HERE YOU CAN DEFINE THE PROPERTIES FOR A SETUP MAP
      * THIS COULD BE INCLUDING SPAWNPOINTS, COLLECTION OF SPAWNPOINTS OR PROPS
-     * failed to find this snipped counter: 1
+     * failed to find this snipped counter: 2
      * */
     public static ArrayList<Map> getSetUpMap() {
         ArrayList<Map> m = new ArrayList<>();
         maps.forEach(map -> {
-            if(map.getAmountOfSpawnCollection("spawn") > 0) {
+            if(map.getAmountOfSpawnCollection("spawn") > 0 && map.getProperty("safeheight") != null && map.getProperty("deathheight") != null) {
                 m.add(map);
             }
         });
@@ -197,18 +197,6 @@ public class MapManager {
             ArrayList<Location> locations = getLocationCollection(name);
             Location location = locations.get(new Random().nextInt(locations.size()));
             player.teleport(location);
-
-            if(Config.getBoolean("enable-spawn-protection")) {
-                Main.getGame().spawnProtection.remove(player);
-                Main.getGame().spawnProtection.add(player);
-                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
-                    @Override
-                    public void run() {
-                        Main.getGame().spawnProtection.remove(player);
-                        player.sendMessage(Messages.getString("player-spawnprotection-ends"));
-                    }
-                }, Config.getInteger("spawn-protection-duration") * 20);
-            }
         }
 
         /**

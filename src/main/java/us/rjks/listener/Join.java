@@ -53,9 +53,10 @@ public class Join implements Listener {
         event.getPlayer().sendMessage(Messages.getString("player-welcome-message"));
 
         event.getPlayer().getInventory().clear();
-        if(KitManager.getKitFromName("startInv") != null) {
+        /*if(KitManager.getKitFromName("startInv") != null) {
             KitManager.getKitFromName("startInv").setKit(event.getPlayer());
-        }
+        }*/
+        Inventory.loadInvSelect(event.getPlayer());
 
     }
 

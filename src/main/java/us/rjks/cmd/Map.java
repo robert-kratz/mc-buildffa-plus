@@ -52,6 +52,24 @@ public class Map implements CommandExecutor {
                         } else {
                             sender.sendMessage(Messages.getString("map-command-delete-error").replaceAll("%mapname%", args[1]));
                         }
+                    } else if(args[0].equalsIgnoreCase("setsafeheight")) {
+                        if(MapManager.getMapFromName(args[1]) != null && ((Player) sender).getWorld().getName().equalsIgnoreCase(MapManager.getMapFromName(args[1]).getSrc())) {
+                            MapManager.Map map = MapManager.getMapFromName(args[1]);
+
+                            map.setProperty("safeheight", ((Player) sender).getLocation().getY());
+                            sender.sendMessage(Messages.getString("map-command-safeheight-set").replaceAll("%mapname%", args[1]).replaceAll("%height%", ((Player) sender).getLocation().getY() + ""));
+                        } else {
+                            sender.sendMessage(Messages.getString("map-command-map-not-found").replaceAll("%mapname%", args[1]));
+                        }
+                    } else if(args[0].equalsIgnoreCase("setdeathheight")) {
+                        if(MapManager.getMapFromName(args[1]) != null && ((Player) sender).getWorld().getName().equalsIgnoreCase(MapManager.getMapFromName(args[1]).getSrc())) {
+                            MapManager.Map map = MapManager.getMapFromName(args[1]);
+
+                            map.setProperty("deathheight", ((Player) sender).getLocation().getY());
+                            sender.sendMessage(Messages.getString("map-command-deathheight-set").replaceAll("%mapname%", args[1]).replaceAll("%height%", ((Player) sender).getLocation().getY() + ""));
+                        } else {
+                            sender.sendMessage(Messages.getString("map-command-map-not-found").replaceAll("%mapname%", args[1]));
+                        }
                     }
                     return true;
                 } else if(args.length == 3) {

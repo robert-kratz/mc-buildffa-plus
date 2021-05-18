@@ -162,6 +162,7 @@ public class Main extends JavaPlugin {
         getCommand("skip").setExecutor(new Skip());
 
         Bukkit.getPluginManager().registerEvents(new Join(), this);
+        Bukkit.getPluginManager().registerEvents(new Move(), this);
         Bukkit.getPluginManager().registerEvents(new Interact(), this);
         Bukkit.getPluginManager().registerEvents(new Quit(), this);
         Bukkit.getPluginManager().registerEvents(new Chat(), this);

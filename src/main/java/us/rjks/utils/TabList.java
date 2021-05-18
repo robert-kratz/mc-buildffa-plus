@@ -86,7 +86,7 @@ public class TabList {
         }
 
         for (Rank rank : ranks) {
-            System.out.println((100000 - rank.getPower()) + rank.getName());
+            System.out.println("[RANK] Loaded rank " + rank.getName());
             Team team = scoreboard.registerNewTeam((100000 - rank.getPower()) + rank.getName());
             team.setPrefix(ChatColor.translateAlternateColorCodes('&', rank.getTabprefix()));
             team.setSuffix(ChatColor.translateAlternateColorCodes('&', rank.getTabsuffix()));

@@ -1,84 +1,94 @@
 # This Plugin was written by Robert Kratz on 02. Mai 2021
 # You need help with setting up the Plugin? Check out my Discord: https://link.rjks.us/support
 
+## If you need a translated version of the Plugin -> https://link.rjks.us/buildffa-v1
+## Wenn du eine übersetzte Version des Plugins brauchst -> https://link.rjks.us/buildffa-v1
+
 no-permission: "&cYou don't have permission to execute this command."
 no-player: "&cYou have to be a player to execute this command."
 
 ## These are the messages for setting up a map with /map
 
 map-command-syntax:
-  - "&e&lSGFFA &r&8\u25CF &7Overview of all Map Commands:"
+  - "&6&lBUILDFFA &r&8\u25CF &7Overview of all Map Commands:"
   - " &8- &emap list &8| &7Gives you a list of all setup maps"
   - " &8- &emap create [CONFIGNAME] [DISPLAYNAME] &8| &7Creates a new map"
   - " &8- &emap delete [CONFIGNAME] &8| &7Delete the given map"
   - " "
+  - " &8- &emap setspawn [CONFIGNAME] spawn &8| &7Sets the spawn"
+  - " &8- &emap setsafeheight [CONFIGNAME] &8| &7Sets the safe height"
+  - " &8- &emap setdeathheight [CONFIGNAME] &8| &7Sets the death height"
+  - " "
   - " &8- &emap saveStartInv &8| &7Saves your current inventory as start inventory"
-  - "&e&lSGFFA &r&8\u25CF &eSupport&8: &7https://link.rjks.us/support"
+  - "&6&lBUILDFFA &r&8\u25CF &eSupport&8: &7https://link.rjks.us/support"
 
 enable-player-joins-message: true
-player-joins-message: "&e&lSGFFA &r&8\u25CF &7Player %player% &ajoined &7SGFFA"
-player-leaves-message: "&e&lSGFFA &r&8\u25CF &7Player %player% &cleft &7SGFFA"
+player-joins-message: "&6&lBUILDFFA &r&8\u25CF &7Player %player% &ajoined &7BuildFFA"
+player-leaves-message: "&6&lBUILDFFA &r&8\u25CF &7Player %player% &cleft &7BuildFFA"
 
-map-command-list-title: "&e&lSGFFA &r&8\u25CF &7Maps in cache (%amount%)"
+map-command-list-title: "&6&lBUILDFFA &r&8\u25CF &7Maps in cache (%amount%)"
 map-command-list-item: "&8- &7NAME: %mapname% &8| &7FILE: %mapsrc%"
 
-map-command-delete-success: "&e&lSGFFA &r&8\u25CF &cDeleted Map %mapname% from all configs, it will still exists in the Maps Folder"
-map-command-delete-error: "&e&lSGFFA &r&8\u25CF &cUnable to loaded map %mapname% because map is not registered"
+map-command-delete-success: "&6&lBUILDFFA &r&8\u25CF &cDeleted Map %mapname% from all configs, it will still exists in the Maps Folder"
+map-command-delete-error: "&6&lBUILDFFA &r&8\u25CF &cUnable to loaded map %mapname% because map is not registered"
 
-map-command-kit-saved: "&e&lSGFFA &r&8\u25CF &aYou set the default start Kit for the user"
+map-command-kit-saved: "&6&lBUILDFFA &r&8\u25CF &aYou set the default start Kit for the user"
 
-map-command-create-success: "&e&lSGFFA &r&8\u25CF &aThe Map %mapname% was successfully created."
-map-command-map-not-found: "&e&lSGFFA &r&8\u25CF &cThe Map %mapname% was not found."
-map-command-map-already-exists: "&e&lSGFFA &r&8\u25CF &cThe Map %mapname% already exists"
-map-command-create-set-spawn-after: "&e&lSGFFA &r&8\u25CF &aPlease set the spawnpoint with &f/map setspawn [MAPNAME] spawn&a, you can also add multiple spawns by executing the same command again. The player will then be send to a random spawn"
-map-command-spawn-set: "&e&lSGFFA &r&8\u25CF &aYou successfully set the spawn %spawn% on map %mapname%"
+map-command-create-success: "&6&lBUILDFFA &r&8\u25CF &aThe Map %mapname% was successfully created."
+map-command-map-not-found: "&6&lBUILDFFA &r&8\u25CF &cThe Map %mapname% was not found."
+map-command-map-already-exists: "&6&lBUILDFFA &r&8\u25CF &cThe Map %mapname% already exists"
+map-command-create-set-spawn-after: "&6&lBUILDFFA &r&8\u25CF &aPlease set the spawnpoint with &f/map setspawn [MAPNAME] spawn&a, you can also add multiple spawns by executing the same command again. The player will then be send to a random spawn"
+map-command-spawn-set: "&6&lBUILDFFA &r&8\u25CF &aYou successfully set the spawn %spawn% on map %mapname%"
+map-command-safeheight-set: "&6&lBUILDFFA &r&8\u25CF &aYou successfully set the safe height to %height%"
+map-command-deathheight-set: "&6&lBUILDFFA &r&8\u25CF &aYou successfully set the death height to %height%"
+
 
 ## These are the messages for setting up a map with /skip
 
-skip-command-map-skiped-successfully: "&e&lSGFFA &r&8\u25CF &aYou skipped the countdown"
-skip-command-map-skiped-successfully-broadcast: "&e&lSGFFA &r&8\u25CF &aThe Player %playername% skipped the map counter"
-skip-command-map-skiped-error: "&e&lSGFFA &r&8\u25CF &cThe Map is already changing"
-skip-command-map-skiped-wait-until-skip: "&e&lSGFFA &r&8\u25CF &cYou have to wait until you can skip"
+skip-command-map-skiped-successfully: "&6&lBUILDFFA &r&8\u25CF &aYou skipped the countdown"
+skip-command-map-skiped-successfully-broadcast: "&6&lBUILDFFA &r&8\u25CF &aThe Player %playername% skipped the map counter"
+skip-command-map-skiped-error: "&6&lBUILDFFA &r&8\u25CF &cThe Map is already changing"
+skip-command-map-skiped-wait-until-skip: "&6&lBUILDFFA &r&8\u25CF &cYou have to wait until you can skip"
 
 ## These are the messages for setting up a map with /forcemap
 
-forcemap-command-already-forced: "&e&lSGFFA &r&8\u25CF &cThere already has been a forcemap"
-forcemap-command-map-not-found: "&e&lSGFFA &r&8\u25CF &cThe map %map% could not be found"
-forcemap-command-successfully: "&e&lSGFFA &r&8\u25CF &aThe next map is going to be: %map%"
+forcemap-command-already-forced: "&6&lBUILDFFA &r&8\u25CF &cThere already has been a forcemap"
+forcemap-command-map-not-found: "&6&lBUILDFFA &r&8\u25CF &cThe map %map% could not be found"
+forcemap-command-successfully: "&6&lBUILDFFA &r&8\u25CF &aThe next map is going to be: %map%"
 forcemap-command-syntax-help:
-  - "&e&lSGFFA &r&8\u25CF &cUse: /forcemap [MAP]"
+  - "&6&lBUILDFFA &r&8\u25CF &cUse: /forcemap [MAP]"
   - " &8- &7%maps%"
 
-stats-command-disabled: "&e&lSGFFA &r&8\u25CF &cStats are disabled on this Server"
+stats-command-disabled: "&6&lBUILDFFA &r&8\u25CF &cStats are disabled on this Server"
 stats-command-show:
-  - "&e&lSGFFA &r&8\u25CF &6Stats for %player%&8:"
-  - "&e&lSGFFA &r&8\u25CF &7Kills&8: &e%kills%"
-  - "&e&lSGFFA &r&8\u25CF &7Deaths&8: &e%deaths%"
-  - "&e&lSGFFA &r&8\u25CF &7KD&8: &e%kd%"
+  - "&6&lBUILDFFA &r&8\u25CF &6Stats for %player%&8:"
+  - "&6&lBUILDFFA &r&8\u25CF &7Kills&8: &e%kills%"
+  - "&6&lBUILDFFA &r&8\u25CF &7Deaths&8: &e%deaths%"
+  - "&6&lBUILDFFA &r&8\u25CF &7KD&8: &e%kd%"
   - " "
-  - "&e&lSGFFA &r&8\u25CF &7Ranking&8: &6#%ranking%"
+  - "&6&lBUILDFFA &r&8\u25CF &7Ranking&8: &6#%ranking%"
 
 ## These are the system messages, all functions can be disabled/enabled in the config.yml
 
 ## %mapcounter% is giving back the seconds until the mapchange
-game-action-bar: "&e&lSGFFA &r&8\u25CF &7Map&8: &e%currentmap% &7Mapchange&8: &e%mapcounterformated%"
+game-action-bar: "&6&lBUILDFFA &r&8\u25CF &7Map&8: &e%currentmap% &7Mapchange&8: &e%mapcounterformated%"
 
-player-gets-coins: "&e&lSGFFA &r&8\u25CF &a+ %amount% Coins"
-player-lose-coins: "&e&lSGFFA &r&8\u25CF &c- %amount% Coins"
+player-gets-coins: "&6&lBUILDFFA &r&8\u25CF &a+ %amount% Coins"
+player-lose-coins: "&6&lBUILDFFA &r&8\u25CF &c- %amount% Coins"
 
-player-welcome-message: "&e&lSGFFA &r&8\u25CF &4Teaming &cis not allowed, is will be punished with a &4ban"
+player-welcome-message: "&6&lBUILDFFA &r&8\u25CF &4Teaming &cis not allowed, is will be punished with a &4ban"
 
 player-killstreak-broadcast:
   - " "
-  - "&e&lSGFFA &r&8\u25CF &fPlayer %player% has a kill streak of %streak%"
+  - "&6&lBUILDFFA &r&8\u25CF &fPlayer %player% has a kill streak of %streak%"
   - " "
 
-map-changes-in-broadcast: "&e&lSGFFA &r&8\u25CF &aThe Map changes in &seconds& seconds"
+map-changes-in-broadcast: "&6&lBUILDFFA &r&8\u25CF &aThe Map changes in &seconds& seconds"
 map-change-broadcast:
-  - "&e&lSGFFA &r&8\u25CF &7Next Map: &e%mapname% &7by &e%builder%"
+  - "&6&lBUILDFFA &r&8\u25CF &7Next Map: &e%mapname% &7by &e%builder%"
 
 ## Be aware, the maximum lines of a scoreboard are > 16 < and you can not have multiple lines of the same value
-score-board-layout-title: "      &6&lSGFFA      "
+score-board-layout-title: "      &6&lBUILDFFA      "
 score-board-layout:
   - "&e "
   - "&eKills&8:"
@@ -91,19 +101,18 @@ score-board-layout:
   - " &8\u25CF &7%map%"
   - "&l "
 
-player-gets-item: "&e&lSGFFA &r&8\u25CF &aYou got %amount%x %type%"
-player-gets-effect: "&e&lSGFFA &r&8\u25CF &aYou got %effect% for %duration% seconds"
+player-gets-item: "&6&lBUILDFFA &r&8\u25CF &aYou got %amount%x %type%"
+player-gets-effect: "&6&lBUILDFFA &r&8\u25CF &aYou got %effect% for %duration% seconds"
 
-player-died-due-suicide-message: "&e&lSGFFA &r&8\u25CF &cYou committed suicide"
-player-killed-by-killer-message: "&e&lSGFFA &r&8\u25CF &cYou got killed by %killer%&8 &8(&e%killstreak%&8)"
-killer-killed-player-message: "&e&lSGFFA &r&8\u25CF &cYou killed %player% &8(&e%killstreak%&8)"
-player-died-message: "&e&lSGFFA &r&8\u25CF &cYou died"
+player-died-due-suicide-message: "&6&lBUILDFFA &r&8\u25CF &cYou committed suicide"
+player-killed-by-killer-message: "&6&lBUILDFFA &r&8\u25CF &cYou got killed by %killer%&8 &8(&e%killstreak%&8)"
+killer-killed-player-message: "&6&lBUILDFFA &r&8\u25CF &cYou killed %player% &8(&e%killstreak%&8)"
+player-died-message: "&6&lBUILDFFA &r&8\u25CF &cYou died"
 
 player-died-sound: "CLICK"
 killer-killed-sound: "LEVEL_UP"
 
-player-spawnprotection-ends: "&e&lSGFFA &r&8\u25CF &cYour spawn protection has expired"
-player-is-in-spawn-protection: "&e&lSGFFA &r&8\u25CF &c%player% is in spawn protection"
+player-is-in-spawn-protection: "&6&lBUILDFFA &r&8\u25CF &c%player% is in spawn protection"
 
 map-change-main-title: "&a\u2714"
 map-change-sub-title: "&7Next Map: &e%mapname%"

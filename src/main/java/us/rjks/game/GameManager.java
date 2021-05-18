@@ -19,7 +19,7 @@ public class GameManager {
     private MapManager.Map forcemap;
     private Counter mapchange;
     private ScoreBoard scoreBoard;
-    public ArrayList<Player> spawnProtection = new ArrayList<>();
+    public ArrayList<Player> ingame = new ArrayList<>();
     private boolean setup;
 
     public GameManager() {

@@ -23,9 +23,11 @@ public class Damage implements Listener {
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
         if(event.getEntity() instanceof Player) {
-            Player player = (Player) event.getEntity();
-            if(Main.getGame().spawnProtection.contains(player)) {
-                event.setCancelled(true);
+            if(!Main.getGame().isSetup()) {
+                Player player = (Player) event.getEntity();
+                if (event.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
+                    event.setCancelled(true);
+                }
             }
         }
     }
@@ -33,10 +35,12 @@ public class Damage implements Listener {
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
         if(event.getEntity() instanceof Player) {
-            Player player = (Player) event.getEntity();
-            if(Main.getGame().spawnProtection.contains(player)) {
-                event.setCancelled(true);
-                event.getDamager().sendMessage(Messages.getString("player-is-in-spawn-protection").replaceAll("%player%", event.getEntity().getName()));
+            if(!Main.getGame().isSetup()) {
+                Player player = (Player) event.getEntity();
+                if(event.getDamager().getLocation().getY() >= (double)Main.getGame().getCurrentMap().getProperty("safeheight")) {
+                    event.setCancelled(true);
+                    event.getDamager().sendMessage(Messages.getString("player-is-in-spawn-protection").replaceAll("%player%", event.getEntity().getName()));
+                }
             }
         }
     }

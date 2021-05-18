@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="sgffa" />
+      <artifact name="buildffa" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,10 +10,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4b5b537-0bbe-4e23-b65d-c91b80da99e5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/us/rjks/db/Shop.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Move.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/sgffa.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/buildffa.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/cmd/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/cmd/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/game/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/game/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/game/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Build.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Build.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/listener/CountDown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/CountDown.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Damage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Damage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Death.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Death.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Interact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Interact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Join.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Join.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Quit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/Quit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/utils/KitManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/KitManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/utils/MapManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/MapManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/utils/ScoreBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/ScoreBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/utils/TabList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/TabList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tablist.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/tablist.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/messages.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tablist.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tablist.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -15,6 +15,7 @@ import us.rjks.db.Stats;
 import us.rjks.game.GameManager;
 import us.rjks.game.Main;
 import us.rjks.utils.Config;
+import us.rjks.utils.Inventory;
 import us.rjks.utils.KitManager;
 import us.rjks.utils.Messages;
 
@@ -30,57 +31,59 @@ public class Death implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onDeath(PlayerDeathEvent event) {
-        Player player = event.getEntity();
+        if (!Main.getGame().isSetup()) {
+            Player player = event.getEntity();
 
-        respawn(event.getEntity());
+            respawn(event.getEntity());
 
-        event.setDroppedExp(0);
-        event.setDeathMessage(null);
-        event.getDrops().clear();
+            event.setDroppedExp(0);
+            event.setDeathMessage(null);
+            event.getDrops().clear();
 
-        if(Config.getBoolean("enable-stats-system")) {
-            Stats.addDeaths(player.getUniqueId().toString(), 1);
-        }
-
-        player.playSound(player.getLocation(), Sound.valueOf(Messages.getString("player-died-sound")), 1, 1);
-        if(event.getEntity().getKiller() != null) {
-            if(event.getEntity().getKiller().equals(event.getEntity())) {
-                player.sendMessage(Messages.getString("player-died-due-suicide-message"));
-            } else {
-                Player killer = event.getEntity().getKiller();
-
-                player.sendMessage(Messages.getString("player-killed-by-killer-message").replaceAll("%killer%", killer.getName()).replaceAll("%killstreak%", killer.getLevel() + ""));
-                killer.sendMessage(Messages.getString("killer-killed-player-message").replaceAll("%player%", player.getName()).replaceAll("%killstreak%", player.getLevel() + ""));
-
-                player.playSound(player.getLocation(), Sound.valueOf(Messages.getString("killer-killed-sound")), 1, 1);
-
-                if(Config.getBoolean("enable-stats-system")) {
-                    Stats.addKills(killer.getUniqueId().toString(), 1);
-                }
-
-                killer.setLevel(killer.getLevel() + 1);
-                checkStreak(killer);
-
-                if(Config.getBoolean("enable-coins-system")) {
-                    Coins.addCoins(killer.getUniqueId().toString(), Config.getInteger("killer-coins-on-kill"));
-                    killer.sendMessage(Messages.getString("player-gets-coins").replaceAll("%amount%", Config.getInteger("killer-coins-on-kill") + ""));
-                    Coins.removeCoins(player.getUniqueId().toString(), Config.getInteger("player-lose-coins-on-death"));
-                    player.sendMessage(Messages.getString("player-lose-coins").replaceAll("%amount%", Config.getInteger("player-lose-coins-on-death") + ""));
-                }
-
-                if(Config.getBoolean("show-score-board")) {
-                    Main.getGame().getScoreBoard().setScoreBoard(killer);
-                }
+            if(Config.getBoolean("enable-stats-system")) {
+                Stats.addDeaths(player.getUniqueId().toString(), 1);
             }
-        } else {
-            player.sendMessage(Messages.getString("player-died-message"));
-        }
 
-        if(Config.getBoolean("show-score-board")) {
+            player.playSound(player.getLocation(), Sound.valueOf(Messages.getString("player-died-sound")), 1, 1);
+            if(event.getEntity().getKiller() != null) {
+                if(event.getEntity().getKiller().equals(event.getEntity())) {
+                    player.sendMessage(Messages.getString("player-died-due-suicide-message"));
+                } else {
+                    Player killer = event.getEntity().getKiller();
+
+                    player.sendMessage(Messages.getString("player-killed-by-killer-message").replaceAll("%killer%", killer.getName()).replaceAll("%killstreak%", killer.getLevel() + ""));
+                    killer.sendMessage(Messages.getString("killer-killed-player-message").replaceAll("%player%", player.getName()).replaceAll("%killstreak%", player.getLevel() + ""));
+
+                    player.playSound(player.getLocation(), Sound.valueOf(Messages.getString("killer-killed-sound")), 1, 1);
+
+                    if(Config.getBoolean("enable-stats-system")) {
+                        Stats.addKills(killer.getUniqueId().toString(), 1);
+                    }
+
+                    killer.setLevel(killer.getLevel() + 1);
+                    checkStreak(killer);
+
+                    if(Config.getBoolean("enable-coins-system")) {
+                        Coins.addCoins(killer.getUniqueId().toString(), Config.getInteger("killer-coins-on-kill"));
+                        killer.sendMessage(Messages.getString("player-gets-coins").replaceAll("%amount%", Config.getInteger("killer-coins-on-kill") + ""));
+                        Coins.removeCoins(player.getUniqueId().toString(), Config.getInteger("player-lose-coins-on-death"));
+                        player.sendMessage(Messages.getString("player-lose-coins").replaceAll("%amount%", Config.getInteger("player-lose-coins-on-death") + ""));
+                    }
+
+                    if(Config.getBoolean("show-score-board")) {
+                        Main.getGame().getScoreBoard().setScoreBoard(killer);
+                    }
+                }
+            } else {
+                player.sendMessage(Messages.getString("player-died-message"));
+            }
+
+            if(Config.getBoolean("show-score-board")) {
+                Main.getGame().getScoreBoard().setScoreBoard(player);
+            }
             Main.getGame().getScoreBoard().setScoreBoard(player);
+            player.setLevel(0);
         }
-        Main.getGame().getScoreBoard().setScoreBoard(player);
-        player.setLevel(0);
     }
 
     private void checkStreak(Player player) {
@@ -104,16 +107,22 @@ public class Death implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onRespawn(PlayerRespawnEvent event) {
-        Bukkit.getScheduler().runTaskLater(Main.getPlugin(), new Runnable(){
+        if (!Main.getGame().isSetup()) {
+            Bukkit.getScheduler().runTaskLater(Main.getPlugin(), new Runnable(){
 
-            @Override
-            public void run() {
-                Main.getGame().getCurrentMap().teleportPlayerToRandomLocationCollection(event.getPlayer(), "spawn");
-                if(KitManager.getKitFromName("startInv") != null) {
-                    KitManager.getKitFromName("startInv").setKit(event.getPlayer());
+                @Override
+                public void run() {
+                    Main.getGame().getCurrentMap().teleportPlayerToRandomLocationCollection(event.getPlayer(), "spawn");
+//                    if(KitManager.getKitFromName("startInv") != null) {
+//                        KitManager.getKitFromName("startInv").setKit(event.getPlayer());
+//                    }
+                    Inventory.loadInvSelect(event.getPlayer());
+                    if(Main.getGame().ingame.contains(event.getPlayer())) {
+                        Main.getGame().ingame.remove(event.getPlayer());
+                    }
                 }
-            }
-        }, 1);
+            }, 1);
+        }
     }
 
     private void respawn(final Player p) {

@@ -5,6 +5,10 @@
 ## The Hex color defines the color of the Particle for example: 'ad1100' (DARK_RED)
 ## Find a Color Hex Generator on https://www.google.com/search?q=color+picker
 
+## If you need a translated version of the Plugin -> https://link.rjks.us/sgffa-v1
+## Wenn du eine übersetzte Version des Plugins brauchst -> https://link.rjks.us/sgffa-v1
+
+
 Player:
   permission: system.tab.player
   color: '&7'
@@ -12,7 +16,7 @@ Player:
   tabsuffix: ''
   chatformat: "&7Player &8\u25CF &7%playername%&8:&f"
   hex: b3b3b3
-  power: 0
+  power: 5
   defaultRank: true
 VIP:
   permission: system.tab.vip

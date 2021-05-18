@@ -1,10 +1,13 @@
 package us.rjks.utils;
 
+import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import us.rjks.game.Main;
 
+import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -88,12 +91,24 @@ public class KitManager {
             target.setMaxHealth(hp);
             target.getInventory().setHeldItemSlot(0);
             for (String id : inv.keySet()) {
-                if(id.equals("h")) {target.getInventory().setHelmet(inv.get(id)); continue;}
-                if(id.equals("l")) {target.getInventory().setLeggings(inv.get(id)); continue;}
-                if(id.equals("c")) {target.getInventory().setChestplate(inv.get(id)); continue;}
-                if(id.equals("b")) {target.getInventory().setBoots(inv.get(id)); continue;}
+                ItemStack stack = inv.get(id);
+                if(Config.getBoolean("enable-rank-system") && Config.getBoolean("enable-color-armor-by-rank")) {
+                    if(stack.getType().equals(Material.LEATHER_BOOTS) || stack.getType().equals(Material.LEATHER_LEGGINGS) ||
+                            stack.getType().equals(Material.LEATHER_CHESTPLATE) || stack.getType().equals(Material.LEATHER_HELMET)) {
+                        LeatherArmorMeta lch = (LeatherArmorMeta)stack.getItemMeta();
+                        Color color = Color.decode("#" + TabList.getRankByPlayer(target).getHex());
 
-                target.getInventory().setItem(Integer.parseInt(id), inv.get(id));
+                        lch.setColor(org.bukkit.Color.fromBGR(color.getBlue(), color.getGreen(), color.getRed()));
+                        stack.setItemMeta(lch);
+                    }
+                }
+
+                if(id.equals("h")) {target.getInventory().setHelmet(stack); continue;}
+                if(id.equals("l")) {target.getInventory().setLeggings(stack); continue;}
+                if(id.equals("c")) {target.getInventory().setChestplate(stack); continue;}
+                if(id.equals("b")) {target.getInventory().setBoots(stack); continue;}
+
+                target.getInventory().setItem(Integer.parseInt(id), stack);
             }
         }
 
@@ -137,6 +152,10 @@ public class KitManager {
 
         public void setInv(HashMap<String, ItemStack> inv) {
             this.inv = inv;
+        }
+
+        public HashMap<String, ItemStack> getInv() {
+            return inv;
         }
     }
 

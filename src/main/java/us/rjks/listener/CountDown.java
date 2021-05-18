@@ -68,6 +68,16 @@ public class CountDown implements Listener {
                 Bukkit.getOnlinePlayers().forEach(player -> {
                     TitleManager.sendTitle(player, Messages.getString("map-change-main-title").replaceAll("%mapname%", finalMap.getName()).replaceAll("%builder%", finalMap.getAuthor()), Messages.getString("map-change-sub-title").replaceAll("%mapname%", finalMap.getName()).replaceAll("%builder%", finalMap.getAuthor()));
                     player.teleport(Main.getGame().getCurrentMap().getRandomLocationCollection("spawn"));
+
+                    if(Main.getGame().ingame.contains(player)) {
+                        Main.getGame().ingame.remove(player);
+                    }
+
+                    player.getInventory().clear();
+                    player.getInventory().setBoots(null);
+                    player.getInventory().setLeggings(null);
+                    player.getInventory().setChestplate(null);
+                    player.getInventory().setHelmet(null);
                 });
             }
         }

@@ -1,6 +1,10 @@
 ## This Plugin was written by Robert Kratz on 11. Mai 2021
 ## You need help with setting up the Plugin? Check out my Discord: https://link.rjks.us/support
 
+## If you need a translated version of the Plugin -> https://link.rjks.us/sgffa-v1
+## Wenn du eine übersetzte Version des Plugins brauchst -> https://link.rjks.us/sgffa-v1
+
+
 enabled: false
 database: false
 
@@ -23,10 +27,15 @@ coins:
   coins-row: 'coins'
 
 stats:
-  table: 'game_stats'
+  table: 'buildffa_stats'
   uuid-row: 'uuid'
   kills-row: 'kills'
   deaths-row: 'deaths'
+
+shop:
+  table: 'buildffa_shop'
+  uuid-row: 'uuid'
+  item-row: 'item'
 
 ## Rank System Config
 
@@ -34,6 +43,7 @@ enable-rank-system: false
 enable-tab-rank: false
 enable-chat-rank: false
 display-effect-on-player: false
+enable-color-armor-by-rank: false
 display-effect-on-top-while-sneaking: false
 
 ## Ingame Config
@@ -41,26 +51,17 @@ display-effect-on-top-while-sneaking: false
 enable-player-joins-message: true
 enable-player-leaves-message: true
 
+block-disapear-after: 5
 game-action-bar-enabled: true
 show-score-board: true
 hearts-when-join: 20.0
 
 ## Sound could also be > none <, then no sound will be played
 ## Regular Chest for regular-loot
-regular-chest-type: "CHEST"
-regular-chest-open-sound: "CLICK"
-regular-chest-duration-until-respawn: 5
-
-## Regular Chest for legendary-loot
-legendary-chest-type: "ENDER_CHEST"
-legendary-chest-open-sound: "CLICK"
-legendary-chest-duration-until-respawn: 10
-
-
-## Regular Chest for legendary-loot
-special-chest-type: "BEACON"
-special-chest-open-sound: "CLICK"
-special-chest-duration-until-respawn: 20
+luck-block-type: "SPONGE"
+luck-block-open-sound: "CLICK"
+luck-block-effect: 'WITCH_MAGIC'
+luck-block-duration-until-respawn: 5
 
 ## Kill Event, to use stats and coins mysql must be enabled on the server
 enable-coins-system: true
@@ -111,8 +112,6 @@ kill-streak-broadcast:
 map-change-counter-enabled: true
 map-change-counter: 500
 map-change-counter-allow-two-maps-in-a-row: false
-enable-spawn-protection: true
-spawn-protection-duration: 5
 
 map-change-announcement-in-chat:
   - 500
@@ -138,178 +137,10 @@ permissions:
 
 ## Here you can configure the loot for a legendary chest, if you want to lower the chance of an item, just add more of other items to the list
 
-regular-items:
+luck-block-items:
   - ==: org.bukkit.inventory.ItemStack
     type: STONE_SWORD
     meta:
       ==: ItemMeta
       meta-type: UNSPECIFIC
       display-name: '&7Stone Sword'
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_AXE
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Gold Axe'
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_BOOTS
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Gold Boots'
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIAMOND_SWORD
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&bDiamond Sword'
-  - ==: org.bukkit.inventory.ItemStack
-    type: ARROW
-    amount: 4
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Munition'
-  - ==: org.bukkit.inventory.ItemStack
-    type: BOW
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Bow'
-      enchants:
-        ARROW_DAMAGE: 2
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIAMOND_SWORD
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&bDiamond Sword'
-  - ==: org.bukkit.inventory.ItemStack
-    type: COOKED_BEEF
-    amount: 16
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Beef'
-  - ==: org.bukkit.inventory.ItemStack
-    type: COOKED_BEEF
-    amount: 16
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Beef'
-  - ==: org.bukkit.inventory.ItemStack
-    type: COOKED_BEEF
-    amount: 16
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Beef'
-  - ==: org.bukkit.inventory.ItemStack
-    type: COOKED_BEEF
-    amount: 16
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Beef'
-
-## Here you can configure the loot for a legendary chest, if you want to lower the chance of an item, just add more of other items to the list
-
-legendary-items:
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIAMOND_CHESTPLATE
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Stone Sword'
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIAMOND_CHESTPLATE
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Gold Axe'
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_BOOTS
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Gold Boots'
-  - ==: org.bukkit.inventory.ItemStack
-    type: ARROW
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&bDiamond Sword'
-  - ==: org.bukkit.inventory.ItemStack
-    type: ARROW
-    amount: 16
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Munition'
-  - ==: org.bukkit.inventory.ItemStack
-    type: BOW
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Bow'
-      enchants:
-        ARROW_DAMAGE: 2
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIAMOND_SWORD
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&bDiamond Sword'
-  - ==: org.bukkit.inventory.ItemStack
-    type: COOKED_BEEF
-    amount: 16
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Beef'
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIAMOND_SWORD
-    amount: 16
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Beef'
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIAMOND_CHESTPLATE
-    amount: 16
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Beef'
-  - ==: org.bukkit.inventory.ItemStack
-    type: COOKED_BEEF
-    amount: 16
-    meta:
-      ==: ItemMeta
-      meta-type: UNSPECIFIC
-      display-name: '&7Beef'
-
-## Here you can configure the effects for a spectial chest, if you want to lower the chance of an item, just add more of other items to the list
-## You can find a list of all id's of the PotionEffects here: https://mcreator.net/wiki/potion-effect-ids
-## The duration is in ticks -> 20 ticks equals 1 second
-
-special-effects:
-  - ==: PotionEffect
-    effect: 1
-    duration: 600
-    amplifier: 2
-    ambient: true
-    has-particles: true
-  - ==: PotionEffect
-    effect: 8
-    duration: 600
-    amplifier: 2
-    ambient: true
-    has-particles: true
-  - ==: PotionEffect
-    effect: 23
-    duration: 600
-    amplifier: 1
-    ambient: true
-    has-particles: true
