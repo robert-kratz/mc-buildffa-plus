@@ -7,6 +7,10 @@
 no-permission: "&cYou don't have permission to execute this command."
 no-player: "&cYou have to be a player to execute this command."
 
+## GUI's
+
+inventory-sort-gui-name: "&6&lInventory Sort"
+
 ## These are the messages for setting up a map with /map
 
 map-command-syntax:
@@ -22,7 +26,6 @@ map-command-syntax:
   - " &8- &emap saveStartInv &8| &7Saves your current inventory as start inventory"
   - "&6&lBUILDFFA &r&8\u25CF &eSupport&8: &7https://link.rjks.us/support"
 
-enable-player-joins-message: true
 player-joins-message: "&6&lBUILDFFA &r&8\u25CF &7Player %player% &ajoined &7BuildFFA"
 player-leaves-message: "&6&lBUILDFFA &r&8\u25CF &7Player %player% &cleft &7BuildFFA"
 
@@ -41,7 +44,6 @@ map-command-create-set-spawn-after: "&6&lBUILDFFA &r&8\u25CF &aPlease set the sp
 map-command-spawn-set: "&6&lBUILDFFA &r&8\u25CF &aYou successfully set the spawn %spawn% on map %mapname%"
 map-command-safeheight-set: "&6&lBUILDFFA &r&8\u25CF &aYou successfully set the safe height to %height%"
 map-command-deathheight-set: "&6&lBUILDFFA &r&8\u25CF &aYou successfully set the death height to %height%"
-
 
 ## These are the messages for setting up a map with /skip
 
@@ -75,6 +77,11 @@ game-action-bar: "&6&lBUILDFFA &r&8\u25CF &7Map&8: &e%currentmap% &7Mapchange&8:
 
 player-gets-coins: "&6&lBUILDFFA &r&8\u25CF &a+ %amount% Coins"
 player-lose-coins: "&6&lBUILDFFA &r&8\u25CF &c- %amount% Coins"
+
+player-saves-inventory: "&6&lBUILDFFA &r&8\u25CF &aYou successfully saved your inventory"
+player-saves-inventory-sound: "ANVIL_BREAK"
+player-saves-inventory-error: "&6&lBUILDFFA &r&8\u25CF &cYour inventory does not include all required items"
+player-saves-inventory-error-sound: "ANVIL_LAND"
 
 player-welcome-message: "&6&lBUILDFFA &r&8\u25CF &4Teaming &cis not allowed, is will be punished with a &4ban"
 

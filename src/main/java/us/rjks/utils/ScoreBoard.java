@@ -33,10 +33,10 @@ public class ScoreBoard {
 
             Messages.getStringList("score-board-layout").forEach(element -> {
                 ScoreboardScore score = new ScoreboardScore(scoreboard, obj, element
-                        .replaceAll("%kills%", Stats.getKills(player.getUniqueId().toString()) + "")
-                        .replaceAll("%deaths%", Stats.getDeaths(player.getUniqueId().toString()) + "")
+                        .replaceAll("%kills%", Main.getGame().getStats().getKills(player.getUniqueId().toString()) + "")
+                        .replaceAll("%deaths%", Main.getGame().getStats().getDeaths(player.getUniqueId().toString()) + "")
                         .replaceAll("%map%", Main.getGame().getCurrentMap().getName())
-                        .replaceAll("%rank%", Stats.getRank(player.getUniqueId().toString()) + ""));
+                        .replaceAll("%rank%", Main.getGame().getStats().getRank(player.getUniqueId().toString()) + ""));
 
                 score.setScore(Messages.getStringList("score-board-layout").size() - Messages.getStringList("score-board-layout").indexOf(element));
                 PacketPlayOutScoreboardScore packetPlayOutScoreboardScore = new PacketPlayOutScoreboardScore(score);

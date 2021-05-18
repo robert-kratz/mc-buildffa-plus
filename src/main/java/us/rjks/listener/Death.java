@@ -41,7 +41,7 @@ public class Death implements Listener {
             event.getDrops().clear();
 
             if(Config.getBoolean("enable-stats-system")) {
-                Stats.addDeaths(player.getUniqueId().toString(), 1);
+                Main.getGame().getStats().addDeaths(player.getUniqueId().toString(), 1);
             }
 
             player.playSound(player.getLocation(), Sound.valueOf(Messages.getString("player-died-sound")), 1, 1);
@@ -57,16 +57,16 @@ public class Death implements Listener {
                     player.playSound(player.getLocation(), Sound.valueOf(Messages.getString("killer-killed-sound")), 1, 1);
 
                     if(Config.getBoolean("enable-stats-system")) {
-                        Stats.addKills(killer.getUniqueId().toString(), 1);
+                        Main.getGame().getStats().addKills(killer.getUniqueId().toString(), 1);
                     }
 
                     killer.setLevel(killer.getLevel() + 1);
                     checkStreak(killer);
 
                     if(Config.getBoolean("enable-coins-system")) {
-                        Coins.addCoins(killer.getUniqueId().toString(), Config.getInteger("killer-coins-on-kill"));
+                        Main.getGame().getCoins().addCoins(killer.getUniqueId().toString(), Config.getInteger("killer-coins-on-kill"));
                         killer.sendMessage(Messages.getString("player-gets-coins").replaceAll("%amount%", Config.getInteger("killer-coins-on-kill") + ""));
-                        Coins.removeCoins(player.getUniqueId().toString(), Config.getInteger("player-lose-coins-on-death"));
+                        Main.getGame().getCoins().removeCoins(player.getUniqueId().toString(), Config.getInteger("player-lose-coins-on-death"));
                         player.sendMessage(Messages.getString("player-lose-coins").replaceAll("%amount%", Config.getInteger("player-lose-coins-on-death") + ""));
                     }
 
@@ -98,7 +98,7 @@ public class Death implements Listener {
         if(Config.getBoolean("enable-coins-system")) {
             Config.getIntegerList("kill-streak-bonus-coins").forEach(integer -> {
                 if(player.getLevel() == integer) {
-                    Coins.addCoins(player.getUniqueId().toString(), Config.getInteger("killstreak-bonus-coins"));
+                    Main.getGame().getCoins().addCoins(player.getUniqueId().toString(), Config.getInteger("killstreak-bonus-coins"));
                     player.sendMessage(Messages.getString("player-gets-coins").replaceAll("%amount%", Config.getInteger("killstreak-bonus-coins") + ""));
                 }
             });
@@ -116,7 +116,7 @@ public class Death implements Listener {
 //                    if(KitManager.getKitFromName("startInv") != null) {
 //                        KitManager.getKitFromName("startInv").setKit(event.getPlayer());
 //                    }
-                    Inventory.loadInvSelect(event.getPlayer());
+                    Main.getGame().getInventory().loadInvSelect(event.getPlayer());
                     if(Main.getGame().ingame.contains(event.getPlayer())) {
                         Main.getGame().ingame.remove(event.getPlayer());
                     }

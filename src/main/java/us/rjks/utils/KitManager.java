@@ -86,6 +86,20 @@ public class KitManager {
             }
         }
 
+        public HashMap<Integer, ItemStack> getHotbarItems() {
+            HashMap<Integer, ItemStack> stack = new HashMap<>();
+            inv.forEach((s, itemStack) -> {
+                try {
+                    if (Integer.parseInt(s) >= 0 || Integer.parseInt(s) < 9) {
+                        stack.put(Integer.parseInt(s), itemStack);
+                    }
+                } catch (Exception e) {
+                    //Item is not provided
+                }
+            });
+            return stack;
+        }
+
         public void setKit(Player target) {
             target.getInventory().clear();
             target.setMaxHealth(hp);

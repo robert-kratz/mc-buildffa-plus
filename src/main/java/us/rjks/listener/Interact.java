@@ -60,7 +60,7 @@ public class Interact implements Listener {
 
         if (event.getPlayer().getItemInHand() != null) {
             if (event.getPlayer().getItemInHand().getType().equals(Material.FEATHER)) {
-                Inventory.loadLobby(event.getPlayer());
+                Main.getGame().getInventory().loadLobby(event.getPlayer());
             }
         }
 

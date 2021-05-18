@@ -24,7 +24,7 @@ public class Stats implements CommandExecutor {
 
         if(sender instanceof Player) {
             if(Config.getBoolean("enable-stats-system")) {
-                final int kills = us.rjks.db.Stats.getKills(((Player) sender).getUniqueId().toString()), deaths = us.rjks.db.Stats.getDeaths(((Player) sender).getUniqueId().toString());
+                final int kills = Main.getGame().getStats().getKills(((Player) sender).getUniqueId().toString()), deaths = Main.getGame().getStats().getDeaths(((Player) sender).getUniqueId().toString());
                 double kd = 0;
 
                 try {
@@ -35,7 +35,7 @@ public class Stats implements CommandExecutor {
                 final double kkd = kd;
 
                 Messages.getStringList("stats-command-show").forEach(s1 -> {
-                    sender.sendMessage(s1.replaceAll("%player%", sender.getName()).replaceAll("%kills%", kills + "").replaceAll("%deaths%", deaths + "").replaceAll("%kd%", kkd + "").replaceAll("%ranking%", us.rjks.db.Stats.getRank(((Player) sender).getUniqueId().toString()) + ""));
+                    sender.sendMessage(s1.replaceAll("%player%", sender.getName()).replaceAll("%kills%", kills + "").replaceAll("%deaths%", deaths + "").replaceAll("%kd%", kkd + "").replaceAll("%ranking%", Main.getGame().getStats().getRank(((Player) sender).getUniqueId().toString()) + ""));
                 });
             } else {
                 sender.sendMessage("stats-command-disabled");

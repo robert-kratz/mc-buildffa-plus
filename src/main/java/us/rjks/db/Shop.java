@@ -1,5 +1,6 @@
 package us.rjks.db;
 
+import us.rjks.game.Main;
 import us.rjks.utils.Config;
 
 import java.sql.ResultSet;
@@ -19,7 +20,7 @@ public class Shop {
 
     public static void addItem(String uuid, String item) {
         if(Config.getBoolean("database")) {
-            MySQL.update("INSERT INTO " + table + "(" + uuidrow + ", " + itemrow + ", date) VALUES ('"
+            Main.getGame().getMySQL().update("INSERT INTO " + table + "(" + uuidrow + ", " + itemrow + ", date) VALUES ('"
                     + uuid + "','"
                     + item + "','"
                     + System.currentTimeMillis() + "')");
@@ -28,13 +29,13 @@ public class Shop {
 
     public static void removeItem(String uuid, String item) {
         if(Config.getBoolean("database")) {
-            MySQL.update("DELETE FROM " + table + " WHERE " + uuidrow + "='" + uuid + "' AND " + item + "'" + item + "'");
+            Main.getGame().getMySQL().update("DELETE FROM " + table + " WHERE " + uuidrow + "='" + uuid + "' AND " + item + "'" + item + "'");
         }
     }
 
     public static boolean hasItem(String uuid, String item) {
         if(Config.getBoolean("database")) {
-            ResultSet rs = MySQL.getResult("SELECT * FROM " + table + " WHERE " + uuidrow + "='" + uuid + "' AND " + itemrow + "='" + item + "'");
+            ResultSet rs = Main.getGame().getMySQL().getResult("SELECT * FROM " + table + " WHERE " + uuidrow + "='" + uuid + "' AND " + itemrow + "='" + item + "'");
             try {
                 return rs.next();
             } catch (SQLException e) {

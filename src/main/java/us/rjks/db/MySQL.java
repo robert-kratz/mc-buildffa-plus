@@ -17,15 +17,15 @@ import java.sql.SQLException;
 
 public class MySQL {
 
-    private static String username = Config.getString("mysql.user");
-    private static String password = Config.getString("mysql.password");
-    private static String database = Config.getString("mysql.database");
-    private static String host = Config.getString("mysql.host");
-    private static String port = Config.getString("mysql.port");
+    private String username = Config.getString("mysql.user");
+    private String password = Config.getString("mysql.password");
+    private String database = Config.getString("mysql.database");
+    private String host = Config.getString("mysql.host");
+    private String port = Config.getString("mysql.port");
 
-    public static Connection con;
+    public Connection con;
 
-    public static void connect() {
+    public void connect() {
         if(!isConnected()) {
             try {
                 System.out.println("jdbc:mysql://" + host +":" + port + "/" + database + "?autoReconnect=true:" + username + ":" + password);
@@ -37,7 +37,7 @@ public class MySQL {
         }
     }
 
-    public static void disconnect() {
+    public void disconnect() {
         if(isConnected()) {
             try {
                 con.close();
@@ -50,16 +50,17 @@ public class MySQL {
     }
 
 
-    public static boolean isConnected() {
+    public boolean isConnected() {
         return con != null;
     }
 
-    public static void createTable() {
+    public void createTable() {
 
         if(isConnected()) {
             try {
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS " + Config.getString("coins.table") + " (" + Config.getString("coins.uuid-row") + " VARCHAR(255), " + Config.getString("coins.coins-row") + " VARCHAR(255), date VARCHAR(255))");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS " + Config.getString("stats.table") + " (" + Config.getString("stats.uuid-row") + " VARCHAR(255), " + Config.getString("stats.kills-row") + " VARCHAR(255), " + Config.getString("stats.deaths-row") + " VARCHAR(255), date VARCHAR(255))");
+                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS " + Config.getString("sort.table") + " (" + Config.getString("sort.uuid-row") + " VARCHAR(255), " + Config.getString("sort.data-row") + " VARCHAR(255), date VARCHAR(255))");
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -68,7 +69,7 @@ public class MySQL {
 
     }
 
-    public static void update(String qry) {
+    public void update(String qry) {
         if(isConnected()) {
             try {
                 con.createStatement().executeUpdate(qry);
@@ -78,7 +79,7 @@ public class MySQL {
         }
     }
 
-    public static ResultSet getResult(String qry) {
+    public ResultSet getResult(String qry) {
         if(isConnected()) {
             try {
                 return con.createStatement().executeQuery(qry);

@@ -70,11 +70,16 @@ public class Main extends JavaPlugin {
         }
 
         if (Config.getBoolean("database")) {
-            MySQL.connect();
-            MySQL.createTable();
+            getGame().getMySQL().connect();
+            getGame().getMySQL().createTable();
         }
 
         loadListeners();
+
+        if (Messages.getString("no-player") == null) {
+            Bukkit.getConsoleSender().sendMessage("§c§lATTENTION: NO messages.yml WAS FOUND, REALOD THE SERVER TO FIX THIS ISSUE");
+            getGame().setSetup(true);
+        }
 
         if(MapManager.getSetUpMap().size() == 0) {
             Bukkit.broadcastMessage("§c§lATTENTION: THERE ARE NOT SETUP MAPS, PLUGIN IS SETUP MODE");
@@ -165,6 +170,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new Move(), this);
         Bukkit.getPluginManager().registerEvents(new Interact(), this);
         Bukkit.getPluginManager().registerEvents(new Quit(), this);
+        Bukkit.getPluginManager().registerEvents(new InventorySort(), this);
         Bukkit.getPluginManager().registerEvents(new Chat(), this);
         Bukkit.getPluginManager().registerEvents(new Build(), this);
         Bukkit.getPluginManager().registerEvents(new Death(), this);

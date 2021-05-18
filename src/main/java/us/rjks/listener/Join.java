@@ -22,11 +22,14 @@ public class Join implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        if(!Coins.userExists(event.getPlayer().getUniqueId().toString())) {
-            Coins.createUser(event.getPlayer().getUniqueId().toString());
+        if(!Main.getGame().getCoins().userExists(event.getPlayer().getUniqueId().toString())) {
+            Main.getGame().getCoins().createUser(event.getPlayer().getUniqueId().toString());
         }
-        if(!Stats.userExists(event.getPlayer().getUniqueId().toString())) {
-            Stats.createUser(event.getPlayer().getUniqueId().toString());
+        if(!Main.getGame().getStats().userExists(event.getPlayer().getUniqueId().toString())) {
+            Main.getGame().getStats().createUser(event.getPlayer().getUniqueId().toString());
+        }
+        if (!Main.getGame().getSort().userExists(event.getPlayer().getUniqueId().toString())) {
+            Main.getGame().getSort().createUser(event.getPlayer().getUniqueId().toString());
         }
 
         if(Config.getBoolean("enable-player-joins-message")) {
@@ -56,7 +59,7 @@ public class Join implements Listener {
         /*if(KitManager.getKitFromName("startInv") != null) {
             KitManager.getKitFromName("startInv").setKit(event.getPlayer());
         }*/
-        Inventory.loadInvSelect(event.getPlayer());
+        Main.getGame().getInventory().loadInvSelect(event.getPlayer());
 
     }
 

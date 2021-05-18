@@ -1,6 +1,7 @@
 package us.rjks.game;
 
 import org.bukkit.entity.Player;
+import us.rjks.db.*;
 import us.rjks.utils.*;
 
 import java.util.ArrayList;
@@ -19,12 +20,28 @@ public class GameManager {
     private MapManager.Map forcemap;
     private Counter mapchange;
     private ScoreBoard scoreBoard;
+
+    private MySQL mySQL;
+    private Sort sort;
+    private Coins coins;
+    private Shop shop;
+    private Stats stats;
+    private Inventory inventory;
+
     public ArrayList<Player> ingame = new ArrayList<>();
     private boolean setup;
 
     public GameManager() {
         mapchange = new Counter(Type.MAP, Config.getInteger("map-change-counter"));
         scoreBoard = new ScoreBoard();
+
+        inventory = new Inventory();
+
+        mySQL = new MySQL();
+        sort = new Sort();
+        coins = new Coins();
+        shop = new Shop();
+        stats = new Stats();
     }
 
     public MapManager.Map getCurrentMap() {
@@ -41,6 +58,34 @@ public class GameManager {
 
     public ScoreBoard getScoreBoard() {
         return scoreBoard;
+    }
+
+    public Coins getCoins() {
+        return coins;
+    }
+
+    public ArrayList<Player> getIngame() {
+        return ingame;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public Sort getSort() {
+        return sort;
+    }
+
+    public Stats getStats() {
+        return stats;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public MySQL getMySQL() {
+        return mySQL;
     }
 
     public boolean isSetup() {

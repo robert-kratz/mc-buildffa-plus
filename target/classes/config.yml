@@ -37,6 +37,11 @@ shop:
   uuid-row: 'uuid'
   item-row: 'item'
 
+sort:
+  table: 'buildffa_sort'
+  uuid-row: 'uuid'
+  data-row: 'data'
+
 ## Rank System Config
 
 enable-rank-system: false

@@ -4,12 +4,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Arrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerAchievementAwardedEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import us.rjks.game.Main;
@@ -65,6 +67,14 @@ public class Build implements Listener {
     @EventHandler
     public void onFood(@Nonnull FoodLevelChangeEvent event) {
         event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onArrow(@Nonnull ProjectileHitEvent event) {
+        if(event.getEntity() instanceof Arrow){
+            Arrow arrow = (Arrow) event.getEntity();
+            arrow.remove();
+        }
     }
 
     @EventHandler
