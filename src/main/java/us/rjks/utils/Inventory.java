@@ -22,13 +22,18 @@ public class Inventory {
 
     public void loadInvSelect(Player player) {
         player.getInventory().clear();
-        player.getInventory().setHeldItemSlot(3);
-        player.getInventory().setItem(3, new ItemBuilder(Material.FEATHER, "§8➤ §6§lItem selection").checkout());
-        player.getInventory().setItem(5, new ItemBuilder(Material.CHEST, "§8➤ §6§lPerks").checkout());
+        player.getInventory().setHeldItemSlot(Config.getInteger("inventory-sort-slot"));
+
+        if (Config.getBoolean("enable-item-sort")) {
+            player.getInventory().setItem(Config.getInteger("inventory-sort-slot"), Config.getItemStack("item-inventory-sort"));
+        }
+        if (Config.getBoolean("enable-perks-sort")) {
+            player.getInventory().setItem(Config.getInteger("perks-slot"), Config.getItemStack("item-perks"));
+        }
     }
 
     public void loadLobby(Player player) {
-        org.bukkit.inventory.Inventory inv = Bukkit.createInventory(null, 9, Messages.getString("inventory-sort-gui-name"));
+        org.bukkit.inventory.Inventory inv = Bukkit.createInventory(null, 9, Config.getString("inventory-sort-inventory-name"));
         if (KitManager.getKitFromName("startInv") == null) return;
         if (!Config.getBoolean("database")) return;
 
@@ -37,6 +42,10 @@ public class Inventory {
         });
 
         player.openInventory(inv);
+    }
+
+    private void loadPerks(Player player) {
+        org.bukkit.inventory.Inventory inv = Bukkit.createInventory(null, 9, Messages.getString("inventory-perks-name"));
     }
 
 }

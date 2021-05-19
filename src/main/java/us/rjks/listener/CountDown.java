@@ -78,6 +78,8 @@ public class CountDown implements Listener {
                     player.getInventory().setLeggings(null);
                     player.getInventory().setChestplate(null);
                     player.getInventory().setHelmet(null);
+
+                    Main.getGame().getInventory().loadInvSelect(player);
                 });
             }
         }

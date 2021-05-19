@@ -16,6 +16,7 @@ import us.rjks.game.Main;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /***************************************************************************
  *
@@ -64,6 +65,24 @@ public class Config {
             e.printStackTrace();
         }
         return 0.0;
+    }
+
+    public static List<Object> getList(String name) {
+        try {
+            return (List<Object> ) locscfg.get(name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static ItemStack getItemStack(String name) {
+        try {
+            return (ItemStack) locscfg.get(name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static ArrayList<ItemStack> getItemStackList(String name) {

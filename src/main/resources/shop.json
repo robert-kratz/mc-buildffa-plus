@@ -1,0 +1,144 @@
+{
+  "items": [
+    {
+      "name": "buildffa-normal-stick",
+      "ingame": "Start Stick",
+      "category": "STICK",
+      "replace": "STICK",
+      "price": 0,
+      "data": {
+        "already-bought": true
+      },
+      "item": {
+        "type": "STICK",
+        "damage": 0
+      }
+    },
+    {
+      "name": "buildffa-blaze-rod-stick",
+      "ingame": "Blaze Rod",
+      "category": "STICK",
+      "replace": "STICK",
+      "price": 250,
+      "data": {
+        "already-bought": false
+      },
+      "item": {
+        "type": "BLAZE_ROD",
+        "damage": 0
+      }
+    },
+    {
+      "name": "buildffa-bone-stick",
+      "ingame": "Bone",
+      "category": "STICK",
+      "replace": "STICK",
+      "price": 250,
+      "data": {
+        "already-bought": false
+      },
+      "item": {
+        "type": "BONE",
+        "damage": 0
+      }
+    },
+    {
+      "name": "buildffa-feather-stick",
+      "ingame": "Feather",
+      "category": "FEATHER",
+      "replace": "STICK",
+      "price": 250,
+      "data": {
+        "already-bought": false
+      },
+      "item": {
+        "type": "BONE",
+        "damage": 0
+      }
+    },
+    {
+      "name": "buildffa-banner-stick",
+      "ingame": "Banner",
+      "category": "STICK",
+      "replace": "STICK",
+      "price": 250,
+      "data": {
+        "already-bought": false
+      },
+      "item": {
+        "type": "BANNER",
+        "damage": 0
+      }
+    },
+    {
+      "name": "buildffa-normal-block",
+      "ingame": "Banner",
+      "category": "BLOCK",
+      "replace": "SANDSTONE",
+      "price": 250,
+      "data": {
+        "already-bought": false
+      },
+      "item": {
+        "type": "SANDSTONE",
+        "damage": 0
+      }
+    },
+    {
+      "name": "buildffa-latern-block",
+      "ingame": "Banner",
+      "category": "BLOCK",
+      "replace": "SANDSTONE",
+      "price": 250,
+      "data": {
+        "already-bought": false
+      },
+      "item": {
+        "type": "SEA_LANTERN",
+        "damage": 0
+      }
+    },
+    {
+      "name": "buildffa-hay-block",
+      "ingame": "Banner",
+      "category": "BLOCK",
+      "replace": "SANDSTONE",
+      "price": 250,
+      "data": {
+        "already-bought": false
+      },
+      "item": {
+        "type": "HAY_BLOCK",
+        "damage": 0
+      }
+    },
+    {
+      "name": "buildffa-bookshelf-block",
+      "ingame": "Banner",
+      "category": "BLOCK",
+      "replace": "SANDSTONE",
+      "price": 250,
+      "data": {
+        "already-bought": false
+      },
+      "item": {
+        "type": "BOOKSHELF",
+        "damage": 0
+      }
+    },
+    {
+      "name": "buildffa-clay-block",
+      "ingame": "Banner",
+      "category": "BLOCK",
+      "replace": "SANDSTONE",
+      "price": 250,
+      "data": {
+        "already-bought": false
+      },
+      "item": {
+        "type": "HARD_CLAY",
+        "damage": 0
+      }
+    }
+  ]
+}

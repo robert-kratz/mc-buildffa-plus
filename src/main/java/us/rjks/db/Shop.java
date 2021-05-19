@@ -16,9 +16,9 @@ import java.sql.SQLException;
 
 public class Shop {
 
-    private static String uuidrow = Config.getString("shop.uuid-row"), itemrow = Config.getString("shop.item-row"), table = Config.getString("shop.table");
+    private String uuidrow = Config.getString("shop.uuid-row"), itemrow = Config.getString("shop.item-row"), table = Config.getString("shop.table");
 
-    public static void addItem(String uuid, String item) {
+    public void addItem(String uuid, String item) {
         if(Config.getBoolean("database")) {
             Main.getGame().getMySQL().update("INSERT INTO " + table + "(" + uuidrow + ", " + itemrow + ", date) VALUES ('"
                     + uuid + "','"
@@ -27,13 +27,13 @@ public class Shop {
         }
     }
 
-    public static void removeItem(String uuid, String item) {
+    public void removeItem(String uuid, String item) {
         if(Config.getBoolean("database")) {
             Main.getGame().getMySQL().update("DELETE FROM " + table + " WHERE " + uuidrow + "='" + uuid + "' AND " + item + "'" + item + "'");
         }
     }
 
-    public static boolean hasItem(String uuid, String item) {
+    public boolean hasItem(String uuid, String item) {
         if(Config.getBoolean("database")) {
             ResultSet rs = Main.getGame().getMySQL().getResult("SELECT * FROM " + table + " WHERE " + uuidrow + "='" + uuid + "' AND " + itemrow + "='" + item + "'");
             try {
