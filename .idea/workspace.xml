@@ -10,15 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4b5b537-0bbe-4e23-b65d-c91b80da99e5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/Perks.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shop.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/db/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/db/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/listener/CountDown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/listener/CountDown.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/utils/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/utils/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/utils/Inventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/cmd/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/cmd/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/us/rjks/db/Sort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/us/rjks/db/Sort.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

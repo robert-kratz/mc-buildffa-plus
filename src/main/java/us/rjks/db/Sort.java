@@ -70,6 +70,12 @@ public class Sort {
         return null;
     }
 
+    public void clearDatabase() {
+        if (Config.getBoolean("database")) {
+            Main.getGame().getMySQL().update("TRUNCATE '" + table + "'");
+        }
+    }
+
     public HashMap<Integer, Integer> getInventorySort(String uuid) {
         if(Config.getBoolean("database")) {
             try {

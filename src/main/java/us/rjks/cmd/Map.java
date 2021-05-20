@@ -10,6 +10,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import us.rjks.game.Main;
 import us.rjks.utils.*;
 
 /***************************************************************************
@@ -39,6 +40,7 @@ public class Map implements CommandExecutor {
                         });
                     } else if(args[0].equalsIgnoreCase("saveStartInv")) {
                         sender.sendMessage(Messages.getString("map-command-kit-saved").replaceAll("%amount%", MapManager.getMaps().size() + ""));
+                        Main.getGame().getSort().clearDatabase();
                         KitManager.saveKit("startInv", ((Player) sender), new ItemBuilder(Material.CHAINMAIL_CHESTPLATE, "").checkout(), "");
                     }
                     return true;
