@@ -2,9 +2,13 @@ package us.rjks.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
 import us.rjks.db.MySQL;
 import us.rjks.game.Main;
 
@@ -44,8 +48,39 @@ public class Inventory {
         player.openInventory(inv);
     }
 
-    private void loadPerks(Player player) {
-        org.bukkit.inventory.Inventory inv = Bukkit.createInventory(null, 9, Messages.getString("inventory-perks-name"));
+    public void loadPerks(Player player, String category) {
+        org.bukkit.inventory.Inventory inv = Bukkit.createInventory(null, 9*3, "§ePerks §8- §e" + category);
+
+        for (int i = 0; i < 9; i++) {
+            inv.setItem(i, new ItemBuilder(Material.STAINED_GLASS_PANE, " ").setDamage((short) 15).checkout());
+        }
+        for (int i = 18; i < 27; i++) {
+            inv.setItem(i, new ItemBuilder(Material.STAINED_GLASS_PANE, " ").setDamage((short) 15).checkout());
+        }
+
+        int i = 9;
+        String defauult = Main.getGame().getShop().getSelectedPerk(player.getUniqueId().toString(), category);
+        for (Perks.Perk categoryItem : Perks.getCategoryItems(category)) {
+            if (categoryItem.playerHasPerk(player.getUniqueId().toString())) {
+                ItemStack stack = new ItemBuilder(categoryItem.getType(), "§8➤ §e" + categoryItem.getIngame()).setLore("§7  You already bought this item").addItemFlag(ItemFlag.HIDE_ENCHANTS).checkout();
+                if (defauult.equalsIgnoreCase(categoryItem.getName())) {
+                    stack.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
+                }
+                inv.setItem(i, stack);
+            } else {
+                ItemStack stack = new ItemBuilder(categoryItem.getType(), "§8➤ §e" + categoryItem.getIngame()).setLore("§7  Price: §6" + categoryItem.getPrice()).checkout();
+                if (defauult.equalsIgnoreCase(categoryItem.getName())) {
+                    stack.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
+                }
+                inv.setItem(i, stack);
+            }
+            i++;
+        }
+        player.openInventory(inv);
+    }
+
+    private void transformGUISize(int i) {
+        int a = i;
     }
 
 }

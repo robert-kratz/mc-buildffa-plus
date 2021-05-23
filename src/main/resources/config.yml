@@ -42,6 +42,12 @@ sort:
   uuid-row: 'uuid'
   data-row: 'data'
 
+selected:
+  table: 'buildffa_perks_selected'
+  uuid-row: 'uuid'
+  category-row: 'category'
+  data-row: 'data'
+
 ## Rank System Config
 
 enable-rank-system: false
@@ -160,7 +166,7 @@ perks-slot: 5
 inventory-perks-name: "&6&lPerks"
 item-perks:
   ==: org.bukkit.inventory.ItemStack
-  type: FEATHER
+  type: CHEST
   meta:
     ==: ItemMeta
     meta-type: UNSPECIFIC

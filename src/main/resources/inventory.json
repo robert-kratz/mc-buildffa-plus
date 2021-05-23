@@ -1,0 +1,131 @@
+{
+  "inventorys": [
+    {
+      "name": "perks-inventory-blocks",
+      "displayname": "&e&lPerks - &eBlocks",
+      "data": {
+        "type": "DYNAMIC_INVENTORY",
+        "open-sound": "CHEST_OPEN",
+        "close-sound": "CHEST_CLOSE"
+      },
+      "rows": 3,
+      "templates": [
+        {
+          "name": "placeholder-item",
+          "displayname": " ",
+          "tag": "placeholder-item",
+          "item": {
+            "type": "STAINED_GLASS_PANE",
+            "damage": 15,
+            "lore": [],
+            "entchantments": [],
+            "data": {
+              "hide-enchantment": true
+            }
+          }
+        },
+        {
+          "name": "category-item-unselected",
+          "displayname": "&8➤ &e%category%",
+          "tag": "category-item",
+          "item": {
+            "type": "STAINED_GLASS_PANE",
+            "damage": 15,
+            "lore": [
+              "&7  Click gere to open"
+            ],
+            "entchantments": [],
+            "data": {}
+          }
+        },
+        {
+          "name": "category-item-selected",
+          "displayname": "&8➤ &e%category%",
+          "tag": "category-item",
+          "item": {
+            "type": "STAINED_GLASS_PANE",
+            "damage": 15,
+            "lore": [
+              "&7  Click gere to open"
+            ],
+            "entchantments": [
+              {
+                "name": "KNOCKBACK",
+                "value": 1
+              }
+            ],
+            "data": {
+              "hide-enchantment": true
+            }
+          }
+        },
+        {
+          "name": "perk-item-unbought",
+          "displayname": "&8➤ &e%perk-name%",
+          "tag": "perk-item",
+          "item": {
+            "type": "STAINED_GLASS_PANE",
+            "damage": 15,
+            "lore": [],
+            "entchantments": [
+              "&7  Price: &6%price%"
+            ],
+            "data": {}
+          }
+        },
+        {
+          "name": "perk-item-bought",
+          "displayname": "&8➤ &e%perk-name%",
+          "tag": "perk-item",
+          "item": {
+            "type": "STAINED_GLASS_PANE",
+            "damage": 15,
+            "lore": [
+              "&7  You already bought this Item",
+              "&7  Right click to select"
+            ],
+            "entchantments": [],
+            "data": {}
+          }
+        },
+        {
+          "name": "perk-item-bought-selected",
+          "displayname": "&8➤ &e%perk-name%",
+          "tag": "perk-item",
+          "item": {
+            "type": "STAINED_GLASS_PANE",
+            "damage": 15,
+            "lore": [
+              "&7  You already bought this Item",
+              "&7  Right click to select"
+            ],
+            "entchantments": [
+              {
+                "name": "KNOCKBACK",
+                "value": 1
+              }
+            ],
+            "data": {
+              "hide-enchantment": true
+            }
+          }
+        }
+      ],
+      "distribution": [
+        {
+          "range": [21, 22, 23],
+          "name": "placeholder-item"
+        },
+        {
+          "range": [21, 22, 23],
+          "name": "category-item"
+        },
+        {
+          "range": [18, 19, 20, 21, 22, 23, 24, 25, 26],
+          "name": "perk-item"
+        }
+
+      ]
+    }
+  ]
+}

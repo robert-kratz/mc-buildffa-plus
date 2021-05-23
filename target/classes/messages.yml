@@ -9,8 +9,6 @@ no-player: "&cYou have to be a player to execute this command."
 
 ## GUI's
 
-inventory-sort-gui-name: "&6&lInventory Sort"
-
 ## These are the messages for setting up a map with /map
 
 map-command-syntax:

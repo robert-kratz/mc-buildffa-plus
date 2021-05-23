@@ -61,6 +61,8 @@ public class MySQL {
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS " + Config.getString("coins.table") + " (" + Config.getString("coins.uuid-row") + " VARCHAR(255), " + Config.getString("coins.coins-row") + " VARCHAR(255), date VARCHAR(255))");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS " + Config.getString("stats.table") + " (" + Config.getString("stats.uuid-row") + " VARCHAR(255), " + Config.getString("stats.kills-row") + " VARCHAR(255), " + Config.getString("stats.deaths-row") + " VARCHAR(255), date VARCHAR(255))");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS " + Config.getString("sort.table") + " (" + Config.getString("sort.uuid-row") + " VARCHAR(255), " + Config.getString("sort.data-row") + " VARCHAR(255), date VARCHAR(255))");
+                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS " + Config.getString("shop.table") + " (" + Config.getString("shop.uuid-row") + " VARCHAR(255), " + Config.getString("shop.item-row") + " VARCHAR(255), date VARCHAR(255))");
+                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS " + Config.getString("selected.table") + " (" + Config.getString("selected.uuid-row") + " VARCHAR(255), " + Config.getString("selected.category-row") + " VARCHAR(255), " + Config.getString("selected.data-row") + " VARCHAR(255), date VARCHAR(255))");
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

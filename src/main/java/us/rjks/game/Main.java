@@ -10,6 +10,7 @@ import us.rjks.cmd.Map;
 import us.rjks.cmd.Skip;
 import us.rjks.cmd.Stats;
 import us.rjks.db.MySQL;
+import us.rjks.db.Shop;
 import us.rjks.listener.*;
 import us.rjks.utils.*;
 
@@ -58,6 +59,9 @@ public class Main extends JavaPlugin {
 
             MapManager.loadMaps();
             TabList.loadTablist();
+
+            Perks.create();
+            Perks.loadPerks();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -93,7 +97,11 @@ public class Main extends JavaPlugin {
             getGame().getMapchange().start();
 
             Bukkit.getOnlinePlayers().forEach(player -> {
-                player.teleport(Main.getGame().getCurrentMap().getRandomLocationCollection("spawn"));
+                if (Main.getGame().getCurrentMap().getRandomLocationCollection("spawn") == null) {
+                    Bukkit.getConsoleSender().sendMessage("§c§lMap is not loaded");
+                } else {
+                    player.teleport(Main.getGame().getCurrentMap().getRandomLocationCollection("spawn"));
+                }
             });
         }
 

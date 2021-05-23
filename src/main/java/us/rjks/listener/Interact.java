@@ -62,6 +62,9 @@ public class Interact implements Listener {
             if (event.getPlayer().getItemInHand().getType().equals(Material.FEATHER)) {
                 Main.getGame().getInventory().loadLobby(event.getPlayer());
             }
+            if (event.getPlayer().getItemInHand().getType().equals(Material.CHEST)) {
+                Main.getGame().getInventory().loadPerks(event.getPlayer(), "BLOCK");
+            }
         }
 
     }

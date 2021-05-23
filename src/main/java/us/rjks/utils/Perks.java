@@ -1,7 +1,15 @@
 package us.rjks.utils;
 
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Material;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import us.rjks.game.Main;
+
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
 
 /***************************************************************************
  *
@@ -13,18 +21,83 @@ import us.rjks.game.Main;
 
 public class Perks {
 
-    public void loadPerks() {
+    private static File logs = new File("plugins/" + Main.getPlugin().getName() + "/", "shop.json");
+    private static JSONObject locscfg = null;
+    public static ArrayList<Perk> cache = new ArrayList<>();
 
+    public static Perk getPerkFromName(String name) {
+        for (Perk perk : cache) {
+            if (perk.getName().equalsIgnoreCase(name)) {
+                return perk;
+            }
+        }
+        return null;
     }
 
-    public class Perk {
+    public static ArrayList<Perk> getCategoryItems(String name) {
+        ArrayList<Perk> perks = new ArrayList<>();
+        for (Perk perk : cache) {
+            if (perk.getCategory().equalsIgnoreCase(name)) {
+                perks.add(perk);
+            }
+        }
+        return perks;
+    }
+
+    public static ArrayList<String> getCategorys() {
+        ArrayList<String> categorys = new ArrayList<>();
+        for (Perk perk : cache) {
+            if (!categorys.contains(perk.getCategory())) {
+                categorys.add(perk.getCategory());
+            }
+        }
+        return categorys;
+    }
+
+    public static Perk getDefaultPerk(String category) {
+        for (Perk perk : cache) {
+            if (perk.getCategory().equalsIgnoreCase(category) && perk.isDefault()) {
+                return perk;
+            }
+        }
+        return null;
+    }
+
+    public static void loadPerks() {
+        try {
+            locscfg = (JSONObject) new JSONParser().parse(new FileReader("plugins/" + Main.getPlugin().getName() + "/shop.json"));
+        } catch (Exception e) {}
+
+        JSONArray objects = (JSONArray) locscfg.get("items");
+
+        objects.forEach(jsonObject -> {
+            JSONObject jo = (JSONObject) jsonObject;
+
+            JSONObject data = (JSONObject) jo.get("data");
+            JSONObject item = (JSONObject) jo.get("item");
+
+            cache.add(new Perk(jo.get("name").toString(),
+                    jo.get("ingame").toString(),
+                    jo.get("category").toString(),
+                    Material.valueOf(jo.get("replace").toString()),
+                    Material.valueOf(item.get("type").toString()),
+                    Math.toIntExact((long)jo.get("price")),
+                    Math.toIntExact((long)item.get("damage")),
+                    (boolean) data.get("already-bought"),
+                    (boolean) data.get("default")));
+
+            System.out.println("[PERK] Loaded Perk " + jo.get("name").toString());
+        });
+    }
+
+    public static class Perk {
 
         private String name, ingame, category;
         private Material replacement, type;
         private Integer price, damage;
-        private boolean alreadyBought;
+        private boolean alreadyBought, defaul;
 
-        public Perk(String name, String ingame, String category, Material replacement, Material type, Integer price, Integer damage, boolean alreadyBought) {
+        public Perk(String name, String ingame, String category, Material replacement, Material type, Integer price, Integer damage, boolean alreadyBought, boolean defaul) {
             this.name = name;
             this.ingame = ingame;
             this.category = category;
@@ -33,6 +106,7 @@ public class Perks {
             this.price = price;
             this.damage = damage;
             this.alreadyBought = alreadyBought;
+            this.defaul = defaul;
 
         }
 
@@ -76,10 +150,25 @@ public class Perks {
         public String getName() {
             return name;
         }
+
+        public boolean isAlreadyBought() {
+            return alreadyBought;
+        }
+
+        public boolean isDefault() {
+            return defaul;
+        }
     }
 
-    public void create() {
-
+    public static boolean create() {
+        if(!logs.exists()) {
+            try {
+                FileUtils.copyInputStreamToFile(Main.getPlugin().getResource("shop.json"), new File("plugins/" + Main.getPlugin().getName() + "/", "shop.json"));
+                return true;
+            }
+            catch (Exception localException) {}
+        }
+        return false;
     }
 
 }
