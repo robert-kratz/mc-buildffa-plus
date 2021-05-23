@@ -19,9 +19,10 @@
       <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/config.yml" />
       <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/license.yml" />
       <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/messages.yml" />
-      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/mysql.yml" />
       <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/plugin.yml" />
       <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/tablist.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/shop.json" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/inventory.json" />
     </root>
   </artifact>
 </component>

@@ -28,6 +28,7 @@ public class Map implements CommandExecutor {
         if(sender instanceof Player) {
             if(sender.hasPermission(Config.getString("permissions.operator"))) {
                 if(args.length == 0) {
+                    Main.getGame().getCoins().addCoins(((Player) sender).getUniqueId().toString(), 100);
                     Messages.getStringList("map-command-syntax").forEach(msg -> {
                         sender.sendMessage(msg);
                     });

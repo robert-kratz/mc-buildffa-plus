@@ -38,6 +38,10 @@ public class Shop {
 
     public boolean hasItem(String uuid, String item) {
         if(Config.getBoolean("database")) {
+            if (Perks.getPerkFromName(item).isDefault()) {
+                return true;
+            }
+
             ResultSet rs = Main.getGame().getMySQL().getResult("SELECT * FROM " + table + " WHERE " + uuidrow + "='" + uuid + "' AND " + itemrow + "='" + item + "'");
             try {
                 return rs.next();
@@ -80,9 +84,9 @@ public class Shop {
 
     public void selectItem(String uuid, String category, String item) {
         if(Config.getBoolean("database")) {
-            Main.getGame().getMySQL().update("INSERT INTO " + tablename + "(" + uuid + ", " + category + ", " + data + ", date) VALUES ('"
+            Main.getGame().getMySQL().update("INSERT INTO " + tablename + "(" + this.uuid + ", " + this.category + ", " + this.data + ", date) VALUES ('"
                     + uuid + "','"
-                    + category + ","
+                    + category + "','"
                     + item + "','"
                     + System.currentTimeMillis() + "')");
         }

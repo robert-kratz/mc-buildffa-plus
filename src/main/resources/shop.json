@@ -35,7 +35,7 @@
       "ingame": "Bone",
       "category": "STICK",
       "replace": "STICK",
-      "price": 250,
+      "price": 500,
       "data": {
         "already-bought": false,
         "default": false
@@ -50,7 +50,7 @@
       "ingame": "Feather",
       "category": "STICK",
       "replace": "STICK",
-      "price": 250,
+      "price": 750,
       "data": {
         "already-bought": false,
         "default": false
@@ -65,7 +65,7 @@
       "ingame": "Banner",
       "category": "STICK",
       "replace": "STICK",
-      "price": 250,
+      "price": 1000,
       "data": {
         "already-bought": false,
         "default": false
@@ -80,7 +80,7 @@
       "ingame": "Start Sandstone",
       "category": "BLOCK",
       "replace": "SANDSTONE",
-      "price": 250,
+      "price": 0,
       "data": {
         "already-bought": true,
         "default": true
@@ -110,7 +110,7 @@
       "ingame": "Hay",
       "category": "BLOCK",
       "replace": "SANDSTONE",
-      "price": 250,
+      "price": 500,
       "data": {
         "already-bought": false,
         "default": false
@@ -125,7 +125,7 @@
       "ingame": "Bookshelf",
       "category": "BLOCK",
       "replace": "SANDSTONE",
-      "price": 250,
+      "price": 750,
       "data": {
         "already-bought": false,
         "default": false
@@ -140,7 +140,7 @@
       "ingame": "Clay",
       "category": "BLOCK",
       "replace": "SANDSTONE",
-      "price": 250,
+      "price": 1000,
       "data": {
         "already-bought": false,
         "default": false
@@ -152,10 +152,10 @@
     },
     {
       "name": "buildffa-normal-effect",
-      "ingame": "None",
+      "ingame": "No Effect",
       "category": "PARTICLE",
       "replace": "SANDSTONE",
-      "price": 250,
+      "price": 1250,
       "data": {
         "already-bought": true,
         "default": true
@@ -164,64 +164,33 @@
         "type": "BARRIER",
         "damage": 0
       }
-    },
+    }
+  ],
+  "categorys": [
     {
-      "name": "buildffa-latern-block",
-      "ingame": "Latern",
-      "category": "PARTICLE",
-      "replace": "SANDSTONE",
-      "price": 250,
-      "data": {
-        "already-bought": false,
-        "default": false
-      },
+      "name": "Sticks",
+      "config": "STICK",
+      "displayname": "&8\u25CF &eSticks",
       "item": {
-        "type": "SEA_LANTERN",
+        "type": "STICK",
         "damage": 0
       }
     },
     {
-      "name": "buildffa-hay-block",
-      "ingame": "Hay",
-      "category": "PARTICLE",
-      "replace": "SANDSTONE",
-      "price": 250,
-      "data": {
-        "already-bought": false,
-        "default": false
-      },
+      "name": "Blocks",
+      "config": "BLOCK",
+      "displayname": "&8\u25CF &eBlock",
       "item": {
-        "type": "HAY_BLOCK",
+        "type": "SANDSTONE",
         "damage": 0
       }
     },
     {
-      "name": "buildffa-bookshelf-block",
-      "ingame": "Bookshelf",
-      "category": "PARTICLE",
-      "replace": "SANDSTONE",
-      "price": 250,
-      "data": {
-        "already-bought": false,
-        "default": false
-      },
+      "name": "Particle",
+      "config": "PARTICLE",
+      "displayname": "&8\u25CF &eParticle",
       "item": {
-        "type": "BOOKSHELF",
-        "damage": 0
-      }
-    },
-    {
-      "name": "buildffa-clay-block",
-      "ingame": "Clay",
-      "category": "PARTICLE",
-      "replace": "SANDSTONE",
-      "price": 250,
-      "data": {
-        "already-bought": false,
-        "default": false
-      },
-      "item": {
-        "type": "HARD_CLAY",
+        "type": "REDSTONE",
         "damage": 0
       }
     }

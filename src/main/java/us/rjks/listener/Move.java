@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import us.rjks.game.Main;
 import us.rjks.utils.Config;
 import us.rjks.utils.KitManager;
+import us.rjks.utils.Perks;
 
 import java.util.HashMap;
 
@@ -36,11 +37,7 @@ public class Move implements Listener {
                     if (!Config.getBoolean("database")) {
                         KitManager.getKitFromName("startInv").setKit(event.getPlayer());
                     } else {
-                        KitManager.getKitFromName("startInv").setKit(event.getPlayer());
-                        event.getPlayer().getInventory().clear();
-                        Main.getGame().getSort().getInventory(event.getPlayer().getUniqueId().toString()).forEach((integer, itemStack) -> {
-                            event.getPlayer().getInventory().setItem(integer, itemStack);
-                        });
+                        Main.getGame().getInventory().loadGameInv(event.getPlayer());
                     }
                 }
             }

@@ -62,6 +62,9 @@ public class Main extends JavaPlugin {
 
             Perks.create();
             Perks.loadPerks();
+
+            InventoryBuilder.create();
+            InventoryBuilder.loadInventorys();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -184,6 +187,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new Death(), this);
         Bukkit.getPluginManager().registerEvents(new Damage(), this);
         Bukkit.getPluginManager().registerEvents(new CountDown(), this);
+        Bukkit.getPluginManager().registerEvents(new PerkInventory(), this);
     }
 
     public static GameManager getGame() {

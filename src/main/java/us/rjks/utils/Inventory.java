@@ -12,6 +12,7 @@ import org.bukkit.material.MaterialData;
 import us.rjks.db.MySQL;
 import us.rjks.game.Main;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /***************************************************************************
@@ -48,34 +49,81 @@ public class Inventory {
         player.openInventory(inv);
     }
 
-    public void loadPerks(Player player, String category) {
-        org.bukkit.inventory.Inventory inv = Bukkit.createInventory(null, 9*3, "§ePerks §8- §e" + category);
+    public void loadGameInv(Player player) {
+        KitManager.getKitFromName("startInv").setKit(player);
+        player.getInventory().clear();
 
-        for (int i = 0; i < 9; i++) {
-            inv.setItem(i, new ItemBuilder(Material.STAINED_GLASS_PANE, " ").setDamage((short) 15).checkout());
-        }
-        for (int i = 18; i < 27; i++) {
-            inv.setItem(i, new ItemBuilder(Material.STAINED_GLASS_PANE, " ").setDamage((short) 15).checkout());
+        Main.getGame().getSort().getInventory(player.getUniqueId().toString()).forEach((integer, itemStack) -> {
+            ItemStack stack = itemStack;
+            stack.setType(Perks.formatInventory(player.getUniqueId().toString(), itemStack.getType()));
+            player.getInventory().setItem(integer, itemStack);
+        });
+    }
+
+    public void loadPerksBlock(Player player, String cat) {
+        if (!Config.getBoolean("database")) return;
+        if (InventoryBuilder.getInventoryByName("perks-inventory-" + cat) == null) return;
+
+        InventoryBuilder.Inventory inventory = InventoryBuilder.getInventoryByName("perks-inventory-" + cat);
+
+        org.bukkit.inventory.Inventory inv = Bukkit.createInventory(null, 9*inventory.getRows(), inventory.getDisplayname());
+
+        InventoryBuilder.Distribution placeholder = inventory.getDistributionFromName("placeholder-item");
+        for (Integer integer : placeholder.getRange()) {
+            inv.setItem(integer, inventory.getTemplateFromName(placeholder.getName()).getItemStack());
         }
 
-        int i = 9;
-        String defauult = Main.getGame().getShop().getSelectedPerk(player.getUniqueId().toString(), category);
-        for (Perks.Perk categoryItem : Perks.getCategoryItems(category)) {
-            if (categoryItem.playerHasPerk(player.getUniqueId().toString())) {
-                ItemStack stack = new ItemBuilder(categoryItem.getType(), "§8➤ §e" + categoryItem.getIngame()).setLore("§7  You already bought this item").addItemFlag(ItemFlag.HIDE_ENCHANTS).checkout();
-                if (defauult.equalsIgnoreCase(categoryItem.getName())) {
-                    stack.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
+        InventoryBuilder.Distribution category = inventory.getDistributionFromName("category-item");
+        int i = 0;
+        for (Integer integer : category.getRange()) {
+            try {
+                InventoryBuilder.Templates templates = inventory.getTemplateFromName("category-item-unselected");
+                if (Perks.getCategorys().get(i).getConfig().equalsIgnoreCase(cat)) {
+                    templates = inventory.getTemplateFromName("category-item-selected");
                 }
-                inv.setItem(i, stack);
-            } else {
-                ItemStack stack = new ItemBuilder(categoryItem.getType(), "§8➤ §e" + categoryItem.getIngame()).setLore("§7  Price: §6" + categoryItem.getPrice()).checkout();
-                if (defauult.equalsIgnoreCase(categoryItem.getName())) {
-                    stack.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
-                }
-                inv.setItem(i, stack);
+
+                templates.getItemFormat().setType(Perks.getCategorys().get(i).getType());
+                templates.getItemFormat().setDamage(Perks.getCategorys().get(i).getDamage());
+                templates.getItemFormat().setDisplayname(Perks.getCategorys().get(i).getDisplayname());
+
+                inv.setItem(integer, templates.getItemStack());
+                i++;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            i++;
         }
+
+        InventoryBuilder.Distribution perks = inventory.getDistributionFromName("perk-item");
+        ArrayList<Perks.Perk> perk = Perks.getCategoryItems(cat);
+        int a = 0;
+        for (Integer integer : perks.getRange()) {
+            try {
+                InventoryBuilder.Templates templates = inventory.getTemplateFromName("perk-item-unbought");
+
+                if (Main.getGame().getShop().hasItem(player.getUniqueId().toString(), perk.get(a).getName())) {
+                    System.out.println("SELECTED " + Main.getGame().getShop().getSelectedPerk(player.getUniqueId().toString(), cat));
+                    if (Main.getGame().getShop().getSelectedPerk(player.getUniqueId().toString(), cat).equalsIgnoreCase(perk.get(a).getName())) {
+                        //SELECTED AND BOUGHT
+                        templates = inventory.getTemplateFromName("perk-item-bought-selected");
+                    } else {
+                        //BOUGHT BUT NOT SELECTED
+                        templates = inventory.getTemplateFromName("perk-item-bought");
+                    }
+                }
+
+                //FORMAT ITEM
+                templates.getItemFormat().setType(perk.get(a).getType());
+                templates.getItemFormat().setDamage(perk.get(a).getDamage());
+                templates.getItemFormat().addReplacement("%price%", perk.get(a).getPrice());
+                templates.getItemFormat().addReplacement("%perk-name%", perk.get(a).getIngame());
+
+                inv.setItem(integer, templates.getItemStack());
+                a++;
+            } catch (Exception e) {
+                //e.printStackTrace();
+            }
+        }
+
         player.openInventory(inv);
     }
 
