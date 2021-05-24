@@ -1,9 +1,6 @@
 package us.rjks.game;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
+import org.bukkit.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import us.rjks.cmd.Forcemap;
 import us.rjks.cmd.Map;
@@ -15,6 +12,7 @@ import us.rjks.listener.*;
 import us.rjks.utils.*;
 
 import java.awt.*;
+import java.awt.Color;
 import java.io.File;
 
 /***************************************************************************
@@ -99,13 +97,18 @@ public class Main extends JavaPlugin {
             System.out.println("[MAP] Loaded " + map.getName() + " as default");
             getGame().getMapchange().start();
 
-            Bukkit.getOnlinePlayers().forEach(player -> {
-                if (Main.getGame().getCurrentMap().getRandomLocationCollection("spawn") == null) {
-                    Bukkit.getConsoleSender().sendMessage("§c§lMap is not loaded");
-                } else {
-                    player.teleport(Main.getGame().getCurrentMap().getRandomLocationCollection("spawn"));
+            Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+                @Override
+                public void run() {
+                    Bukkit.getOnlinePlayers().forEach(player -> {
+                        if (Main.getGame().getCurrentMap().getRandomLocationCollection("spawn") == null) {
+                            Bukkit.getConsoleSender().sendMessage("§c§lMap is not loaded");
+                        } else {
+                            player.teleport(Main.getGame().getCurrentMap().getRandomLocationCollection("spawn"));
+                        }
+                    });
                 }
-            });
+            }, 5);
         }
 
         if (Config.getBoolean("enable-rank-system") && Config.getBoolean("enable-tab-rank")) {
@@ -122,6 +125,10 @@ public class Main extends JavaPlugin {
             @Override
             public void run() {
                 try {
+                    Main.getGame().getProjectiles().forEach((projectile, s) -> {
+                        projectile.getWorld().spigot().playEffect(projectile.getLocation(), Effect.valueOf(s));
+                    });
+
                     Bukkit.getOnlinePlayers().forEach(player -> {
                         //Actionbar
                         if (Config.getBoolean("game-action-bar-enabled") && MapManager.getSetUpMap().size() != 0)
@@ -180,6 +187,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new Join(), this);
         Bukkit.getPluginManager().registerEvents(new Move(), this);
         Bukkit.getPluginManager().registerEvents(new Interact(), this);
+        Bukkit.getPluginManager().registerEvents(new InventoryClick(), this);
         Bukkit.getPluginManager().registerEvents(new Quit(), this);
         Bukkit.getPluginManager().registerEvents(new InventorySort(), this);
         Bukkit.getPluginManager().registerEvents(new Chat(), this);
@@ -188,6 +196,8 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new Damage(), this);
         Bukkit.getPluginManager().registerEvents(new CountDown(), this);
         Bukkit.getPluginManager().registerEvents(new PerkInventory(), this);
+        Bukkit.getPluginManager().registerEvents(new PerkBow(), this);
+        Bukkit.getPluginManager().registerEvents(new InventoryBuilder(), this);
     }
 
     public static GameManager getGame() {

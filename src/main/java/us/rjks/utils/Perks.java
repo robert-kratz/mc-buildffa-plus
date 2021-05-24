@@ -1,6 +1,7 @@
 package us.rjks.utils;
 
 import org.apache.commons.io.FileUtils;
+import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -10,6 +11,7 @@ import us.rjks.game.Main;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /***************************************************************************
  *
@@ -54,9 +56,10 @@ public class Perks {
 
         for (Category category : Perks.getCategorys()) {
             Perk perks = getPerkFromName(Main.getGame().getShop().getSelectedPerk(uuid, category.getConfig()));
-            System.out.println("PERK " + perks.getName());
-            if (material.equals(perks.getReplacement())) {
-                return perks.getType();
+            if (perks.getReplacement() != null) {
+                if (material.equals(perks.getReplacement())) {
+                    return perks.getType();
+                }
             }
         }
         return material;
@@ -89,20 +92,7 @@ public class Perks {
 
         objects.forEach(jsonObject -> {
             JSONObject jo = (JSONObject) jsonObject;
-
-            JSONObject data = (JSONObject) jo.get("data");
-            JSONObject item = (JSONObject) jo.get("item");
-
-            cache.add(new Perk(jo.get("name").toString(),
-                    jo.get("ingame").toString(),
-                    jo.get("category").toString(),
-                    Material.valueOf(jo.get("replace").toString()),
-                    Material.valueOf(item.get("type").toString()),
-                    Math.toIntExact((long)jo.get("price")),
-                    Math.toIntExact((long)item.get("damage")),
-                    (boolean) data.get("already-bought"),
-                    (boolean) data.get("default")));
-
+            cache.add(new Perk(jo));
             System.out.println("[PERK] Loaded Perk " + jo.get("name").toString());
         });
 
@@ -110,7 +100,6 @@ public class Perks {
 
         categorys.forEach(jsonObject -> {
             JSONObject jo = (JSONObject) jsonObject;
-
             cacheCategory.add(new Category(jo));
             System.out.println("[CAT] Loaded category " + jo.get("config").toString());
         });
@@ -158,19 +147,43 @@ public class Perks {
         private String name, ingame, category;
         private Material replacement, type;
         private Integer price, damage;
-        private boolean alreadyBought, defaul;
+        private boolean alreadyBought = false, defaul = false;
+        private HashMap<String, Object> data = new HashMap<>();
 
-        public Perk(String name, String ingame, String category, Material replacement, Material type, Integer price, Integer damage, boolean alreadyBought, boolean defaul) {
-            this.name = name;
-            this.ingame = ingame;
-            this.category = category;
-            this.replacement = replacement;
-            this.type = type;
-            this.price = price;
-            this.damage = damage;
-            this.alreadyBought = alreadyBought;
-            this.defaul = defaul;
+        public Perk(JSONObject object) {
+            if (object == null) return;
 
+            this.name = object.get("name").toString();
+            this.ingame = object.get("ingame").toString();
+            this.category = object.get("category").toString();
+
+            this.price = Math.toIntExact((long) object.get("price"));
+
+            JSONObject item = (JSONObject) object.get("item");
+
+            this.damage = Math.toIntExact((long) item.get("damage"));
+            this.type = Material.valueOf(item.get("type").toString());
+
+            if (object.get("replace") != null) {
+                try {
+                    this.replacement = Material.valueOf(object.get("replace").toString());
+                } catch (IllegalArgumentException e) {
+                    //NOT SET
+                }
+            }
+
+            JSONObject data = (JSONObject) object.get("data");
+
+            if (data.get("already-bought") != null) {
+                this.alreadyBought = (boolean)data.get("already-bought");
+            }
+            if (data.get("default") != null) {
+                this.defaul = (boolean)data.get("default");
+            }
+
+            data.forEach((o, o2) -> {
+                this.data.put(o.toString(), o2);
+            });
         }
 
         public boolean playerHasPerk(String uuid) {
@@ -184,6 +197,14 @@ public class Perks {
             //TODO: SELECT PERK IN DATABASE
 
             return true;
+        }
+
+        public Object getDataValue(String key) {
+            return data.get(key);
+        }
+
+        public HashMap<String, Object> getData() {
+            return data;
         }
 
         public Material getType() {

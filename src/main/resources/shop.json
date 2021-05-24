@@ -190,7 +190,7 @@
       "config": "PARTICLE",
       "displayname": "&8\u25CF &eParticle",
       "item": {
-        "type": "REDSTONE",
+        "type": "BOW",
         "damage": 0
       }
     }

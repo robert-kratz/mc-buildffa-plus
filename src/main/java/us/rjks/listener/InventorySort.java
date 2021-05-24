@@ -28,7 +28,7 @@ public class InventorySort implements Listener {
 
     @EventHandler
     public void onInvClose(InventoryCloseEvent event) {
-        if (event.getInventory().getName().equalsIgnoreCase(Messages.getString("inventory-sort-gui-name"))) {
+        if (event.getInventory().getName().equalsIgnoreCase(Config.getString("inventory-sort-inventory-name"))) {
             if (KitManager.getKitFromName("startInv") == null) return;
 
             //CHECK IF ALL ITEMS ARE CONTAINED
@@ -61,6 +61,10 @@ public class InventorySort implements Listener {
             ((Player) event.getPlayer()).playSound(event.getPlayer().getLocation(), Sound.valueOf(Messages.getString("player-saves-inventory-sound")), 1, 1);
             event.getPlayer().sendMessage(Messages.getString("player-saves-inventory"));
             Main.getGame().getInventory().loadInvSelect((Player) event.getPlayer());
+
+            if (Main.getGame().getSort().getInventorySort(event.getPlayer().getUniqueId().toString()) != fina) {
+                Main.getGame().getSort().setInventorySort(event.getPlayer().getUniqueId().toString(), fina);
+            }
         }
     }
 }

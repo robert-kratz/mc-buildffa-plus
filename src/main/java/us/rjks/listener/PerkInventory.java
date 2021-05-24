@@ -6,10 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import us.rjks.db.Shop;
 import us.rjks.game.Main;
-import us.rjks.utils.Config;
-import us.rjks.utils.Inventory;
-import us.rjks.utils.InventoryBuilder;
-import us.rjks.utils.Perks;
+import us.rjks.utils.*;
 
 /***************************************************************************
  *
@@ -50,8 +47,6 @@ public class PerkInventory implements Listener {
                     if (integer == event.getSlot()) {
                         String cate = "";
                         for (Perks.Category s : Perks.getCategorys()) {
-                            System.out.println(inventory.getName());
-                            System.out.println(s.getConfig().toLowerCase());
                             if (inventory.getName().contains(s.getConfig().toLowerCase())) {
                                 cate = s.getConfig();
                             }
@@ -64,7 +59,7 @@ public class PerkInventory implements Listener {
                         if (shop.hasItem(uuid, perk.getName()) && !shop.hasSelected(uuid, cate, perk.getName())) {
                             shop.unSelectCategory(uuid, cate);
                             shop.selectItem(uuid, cate, perk.getName());
-                            event.getWhoClicked().sendMessage("You selected " + perk.getIngame());
+                            event.getWhoClicked().sendMessage(Messages.getString("player-perk-selected").replaceAll("%perkname%", perk.getIngame()));
                             Main.getGame().getInventory().loadPerksBlock((Player) event.getWhoClicked(), cate);
                         } else if (!shop.hasItem(uuid, perk.getName())) {
                             if (Main.getGame().getCoins().getCoins(uuid) >= perk.getPrice()) {
@@ -72,10 +67,10 @@ public class PerkInventory implements Listener {
                                 Main.getGame().getCoins().removeCoins(uuid, perk.getPrice());
                                 shop.unSelectCategory(uuid, cate);
                                 shop.selectItem(uuid, cate, perk.getName());
-                                event.getWhoClicked().sendMessage("You successfully bought " + perk.getIngame());
+                                event.getWhoClicked().sendMessage(Messages.getString("player-buys-perk").replaceAll("%perkname%", perk.getIngame()).replaceAll("%price%", perk.getPrice() + ""));
                                 Main.getGame().getInventory().loadPerksBlock((Player) event.getWhoClicked(), cate);
                             } else {
-                                event.getWhoClicked().sendMessage("You dont have enough coins");
+                                event.getWhoClicked().sendMessage(Messages.getString("player-perk-not-enough-coins"));
                                 event.getWhoClicked().closeInventory();
                             }
                         } else {

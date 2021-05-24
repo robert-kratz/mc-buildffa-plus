@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import us.rjks.game.Main;
+import us.rjks.utils.Config;
 import us.rjks.utils.Messages;
 
 import javax.swing.text.html.parser.Entity;
@@ -28,6 +29,9 @@ public class Damage implements Listener {
                 if (event.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
                     event.setCancelled(true);
                 }
+                if (!Config.getBoolean("allow-damage")) {
+                    event.setDamage(0);
+                }
             }
         }
     }
@@ -40,6 +44,9 @@ public class Damage implements Listener {
                 if(event.getDamager().getLocation().getY() >= (double)Main.getGame().getCurrentMap().getProperty("safeheight")) {
                     event.setCancelled(true);
                     event.getDamager().sendMessage(Messages.getString("player-is-in-spawn-protection").replaceAll("%player%", event.getEntity().getName()));
+                }
+                if (!Config.getBoolean("allow-damage")) {
+                    event.setDamage(0);
                 }
             }
         }

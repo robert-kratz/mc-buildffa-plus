@@ -7,8 +7,6 @@
 no-permission: "&cYou don't have permission to execute this command."
 no-player: "&cYou have to be a player to execute this command."
 
-## GUI's
-
 ## These are the messages for setting up a map with /map
 
 map-command-syntax:
@@ -105,9 +103,9 @@ score-board-layout:
   - "&eMap&8:"
   - " &8\u25CF &7%map%"
   - "&l "
-
-player-gets-item: "&6&lBUILDFFA &r&8\u25CF &aYou got %amount%x %type%"
-player-gets-effect: "&6&lBUILDFFA &r&8\u25CF &aYou got %effect% for %duration% seconds"
+  - "&eCoins&8:"
+  - " &8\u25CF &e%coins%"
+  - "&l "
 
 player-died-due-suicide-message: "&6&lBUILDFFA &r&8\u25CF &cYou committed suicide"
 player-killed-by-killer-message: "&6&lBUILDFFA &r&8\u25CF &cYou got killed by %killer%&8 &8(&e%killstreak%&8)"
@@ -118,6 +116,10 @@ player-died-sound: "CLICK"
 killer-killed-sound: "LEVEL_UP"
 
 player-is-in-spawn-protection: "&6&lBUILDFFA &r&8\u25CF &c%player% is in spawn protection"
+
+player-buys-perk: "&6&lBUILDFFA &r&8\u25CF &aYou successfully bought %perkname% for %price% coins"
+player-perk-not-enough-coins: "&6&lBUILDFFA &r&8\u25CF &cYou dont have enough coins"
+player-perk-selected: "&6&lBUILDFFA &r&8\u25CF &aYou selected %perkname%"
 
 map-change-main-title: "&a\u2714"
 map-change-sub-title: "&7Next Map: &e%mapname%"

@@ -54,9 +54,9 @@ public class Inventory {
         player.getInventory().clear();
 
         Main.getGame().getSort().getInventory(player.getUniqueId().toString()).forEach((integer, itemStack) -> {
-            ItemStack stack = itemStack;
+            ItemStack stack = new ItemStack(itemStack);
             stack.setType(Perks.formatInventory(player.getUniqueId().toString(), itemStack.getType()));
-            player.getInventory().setItem(integer, itemStack);
+            player.getInventory().setItem(integer, stack);
         });
     }
 
@@ -101,7 +101,6 @@ public class Inventory {
                 InventoryBuilder.Templates templates = inventory.getTemplateFromName("perk-item-unbought");
 
                 if (Main.getGame().getShop().hasItem(player.getUniqueId().toString(), perk.get(a).getName())) {
-                    System.out.println("SELECTED " + Main.getGame().getShop().getSelectedPerk(player.getUniqueId().toString(), cat));
                     if (Main.getGame().getShop().getSelectedPerk(player.getUniqueId().toString(), cat).equalsIgnoreCase(perk.get(a).getName())) {
                         //SELECTED AND BOUGHT
                         templates = inventory.getTemplateFromName("perk-item-bought-selected");

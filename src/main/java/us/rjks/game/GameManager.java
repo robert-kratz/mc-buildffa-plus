@@ -1,10 +1,12 @@
 package us.rjks.game;
 
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import us.rjks.db.*;
 import us.rjks.utils.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /***************************************************************************
  *
@@ -29,6 +31,7 @@ public class GameManager {
     private Inventory inventory;
 
     public ArrayList<Player> ingame = new ArrayList<>();
+    public HashMap<Projectile, String> projectiles = new HashMap<>();
     private boolean setup;
 
     public GameManager() {
@@ -82,6 +85,10 @@ public class GameManager {
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public HashMap<Projectile, String> getProjectiles() {
+        return projectiles;
     }
 
     public MySQL getMySQL() {

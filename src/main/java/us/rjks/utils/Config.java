@@ -78,7 +78,15 @@ public class Config {
 
     public static ItemStack getItemStack(String name) {
         try {
-            return (ItemStack) locscfg.get(name);
+            ItemStack stack = (ItemStack) locscfg.get(name);
+            String display = "";
+            if(stack.getItemMeta() != null && stack.getItemMeta().getDisplayName() != null) {
+                display = ChatColor.translateAlternateColorCodes('&', stack.getItemMeta().getDisplayName());
+            }
+            ItemMeta meta = stack.getItemMeta();
+            meta.setDisplayName(display);
+            stack.setItemMeta(meta);
+            return stack;
         } catch (Exception e) {
             e.printStackTrace();
         }

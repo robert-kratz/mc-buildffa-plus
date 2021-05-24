@@ -3,7 +3,13 @@ package us.rjks.utils;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.json.simple.JSONArray;
@@ -25,7 +31,21 @@ import java.util.regex.Matcher;
  *
  **************************************************************************/
 
-public class InventoryBuilder {
+public class InventoryBuilder implements Listener {
+
+    @EventHandler
+    public void onopen(InventoryOpenEvent event) {
+        if (InventoryBuilder.getInventoryByName(event.getInventory().getTitle()) == null) return;
+        if (InventoryBuilder.getInventoryByName(event.getInventory().getTitle()).getDataFromName("open-sound") == null) return;
+        ((Player)event.getPlayer()).playSound(event.getPlayer().getLocation(), Sound.valueOf(InventoryBuilder.getInventoryByName(event.getInventory().getTitle()).getDataFromName("open-sound").getValueString().toString()), 1, 1);
+    }
+
+    @EventHandler
+    public void onclose(InventoryCloseEvent event) {
+        if (InventoryBuilder.getInventoryByName(event.getInventory().getTitle()) == null) return;
+        if (InventoryBuilder.getInventoryByName(event.getInventory().getTitle()).getDataFromName("close-sound") == null) return;
+        ((Player)event.getPlayer()).playSound(event.getPlayer().getLocation(), Sound.valueOf(InventoryBuilder.getInventoryByName(event.getInventory().getTitle()).getDataFromName("close-sound").getValueString().toString()), 1, 1);
+    }
 
     private static File logs = new File("plugins/" + Main.getPlugin().getName() + "/", "inventory.json");
     private static JSONObject locscfg = null;
@@ -93,6 +113,15 @@ public class InventoryBuilder {
                 });
                 this.distribution.add(distribution1);
             });
+        }
+
+        public Data getDataFromName(String name) {
+            for (Data datra : data) {
+                if (datra.getName().equalsIgnoreCase(name)) {
+                    return datra;
+                }
+            }
+            return null;
         }
 
         public Templates getTemplateFromName(String name) {
@@ -212,8 +241,6 @@ public class InventoryBuilder {
             });
             ItemStack stack = itemBuilder.checkout();
             itemFormat.getEnchantments().forEach((enchantment, integer) -> {
-                System.out.println(enchantment);
-                System.out.println(integer);
                 stack.addUnsafeEnchantment(enchantment, integer);
             });
             return stack;

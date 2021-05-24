@@ -36,6 +36,7 @@ public class ScoreBoard {
                         .replaceAll("%kills%", Main.getGame().getStats().getKills(player.getUniqueId().toString()) + "")
                         .replaceAll("%deaths%", Main.getGame().getStats().getDeaths(player.getUniqueId().toString()) + "")
                         .replaceAll("%map%", Main.getGame().getCurrentMap().getName())
+                        .replaceAll("%coins%", Main.getGame().getCoins().getCoins(player.getUniqueId().toString()) + "")
                         .replaceAll("%rank%", Main.getGame().getStats().getRank(player.getUniqueId().toString()) + ""));
 
                 score.setScore(Messages.getStringList("score-board-layout").size() - Messages.getStringList("score-board-layout").indexOf(element));

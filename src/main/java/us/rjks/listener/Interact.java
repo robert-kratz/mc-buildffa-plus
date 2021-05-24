@@ -31,31 +31,9 @@ public class Interact implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
-        if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
 
-            //Luck Block
-            if(event.getClickedBlock().getType().equals(Material.valueOf(Config.getString("luck-block-type")))) {
-                event.getClickedBlock().setType(Material.AIR);
-
-                Block block = event.getClickedBlock();
-                if(Config.getString("luck-block-open-sound").equalsIgnoreCase("none")) {
-                    event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.valueOf(Config.getString("luck-block-open-sound")), 1, 1);
-                }
-
-                ItemStack stack = Config.getItemStackList("luck-block-items").get(new Random().nextInt(Config.getItemStackList("luck-block-items").size()));
-
-                event.getPlayer().getInventory().addItem(stack);
-                event.getPlayer().sendMessage(Messages.getString("player-gets-item").replaceAll("%amount%", stack.getAmount() + "").replaceAll("%type%", stack.getType().toString()));
-
-                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
-                    @Override
-                    public void run() {
-                        if(Bukkit.getWorlds().contains(block.getWorld())) {
-                            block.setType(Material.valueOf(Config.getString("luck-block-type")));
-                        }
-                    }
-                }, Config.getInteger("luck-block-duration-until-respawn") * 20);
-            }
+        if (event.getPlayer().getItemInHand() != null && event.getPlayer().getItemInHand().getType().equals(Material.BANNER)) {
+            event.setCancelled(true);
         }
 
         if (!Main.getGame().getIngame().contains(event.getPlayer())) {

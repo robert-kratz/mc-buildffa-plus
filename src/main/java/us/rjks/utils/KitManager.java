@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import us.rjks.game.Main;
 
@@ -106,6 +107,9 @@ public class KitManager {
             target.getInventory().setHeldItemSlot(0);
             for (String id : inv.keySet()) {
                 ItemStack stack = inv.get(id);
+                ItemMeta meta = stack.getItemMeta();
+                meta.spigot().setUnbreakable(true);
+                stack.setItemMeta(meta);
                 if(Config.getBoolean("enable-rank-system") && Config.getBoolean("enable-color-armor-by-rank")) {
                     if(stack.getType().equals(Material.LEATHER_BOOTS) || stack.getType().equals(Material.LEATHER_LEGGINGS) ||
                             stack.getType().equals(Material.LEATHER_CHESTPLATE) || stack.getType().equals(Material.LEATHER_HELMET)) {
@@ -162,14 +166,6 @@ public class KitManager {
 
         public void setName(String name) {
             this.name = name;
-        }
-
-        public void setInv(HashMap<String, ItemStack> inv) {
-            this.inv = inv;
-        }
-
-        public HashMap<String, ItemStack> getInv() {
-            return inv;
         }
     }
 

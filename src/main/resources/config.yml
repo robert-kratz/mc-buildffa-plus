@@ -62,17 +62,13 @@ display-effect-on-top-while-sneaking: false
 enable-player-joins-message: true
 enable-player-leaves-message: true
 
+allow-damage: true
+allow-item-move-in-inventory: true
+
 block-disapear-after: 5
 game-action-bar-enabled: true
 show-score-board: true
 hearts-when-join: 20.0
-
-## Sound could also be > none <, then no sound will be played
-## Regular Chest for regular-loot
-luck-block-type: "SPONGE"
-luck-block-open-sound: "CLICK"
-luck-block-effect: 'WITCH_MAGIC'
-luck-block-duration-until-respawn: 5
 
 ## Kill Event, to use stats and coins mysql must be enabled on the server
 enable-coins-system: true
@@ -157,20 +153,19 @@ item-inventory-sort:
   meta:
     ==: ItemMeta
     meta-type: UNSPECIFIC
-    display-name: '&8\u27A4 &6&lItem selection'
+    display-name: '&6&lItem selection'
 
 ## Perks
 
 enable-perks-sort: true
 perks-slot: 5
-inventory-perks-name: "&6&lPerks"
 item-perks:
   ==: org.bukkit.inventory.ItemStack
   type: CHEST
   meta:
     ==: ItemMeta
     meta-type: UNSPECIFIC
-    display-name: '&8\u27A4 &6&lItem selection'
+    display-name: '&6&lPerks'
 
 ## Here you can configure the loot for a legendary chest, if you want to lower the chance of an item, just add more of other items to the list
 
