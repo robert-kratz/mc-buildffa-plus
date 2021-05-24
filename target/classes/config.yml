@@ -64,6 +64,7 @@ enable-player-leaves-message: true
 
 allow-damage: true
 allow-item-move-in-inventory: true
+auto-unbreakable: true
 
 block-disapear-after: 5
 game-action-bar-enabled: true

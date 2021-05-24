@@ -107,9 +107,11 @@ public class KitManager {
             target.getInventory().setHeldItemSlot(0);
             for (String id : inv.keySet()) {
                 ItemStack stack = inv.get(id);
-                ItemMeta meta = stack.getItemMeta();
-                meta.spigot().setUnbreakable(true);
-                stack.setItemMeta(meta);
+                if (Config.getBoolean("auto-unbreakable")) {
+                    ItemMeta meta = stack.getItemMeta();
+                    meta.spigot().setUnbreakable(true);
+                    stack.setItemMeta(meta);
+                }
                 if(Config.getBoolean("enable-rank-system") && Config.getBoolean("enable-color-armor-by-rank")) {
                     if(stack.getType().equals(Material.LEATHER_BOOTS) || stack.getType().equals(Material.LEATHER_LEGGINGS) ||
                             stack.getType().equals(Material.LEATHER_CHESTPLATE) || stack.getType().equals(Material.LEATHER_HELMET)) {

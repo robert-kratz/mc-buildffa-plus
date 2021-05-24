@@ -96,8 +96,7 @@
             "type": "STAINED_GLASS_PANE",
             "damage": 15,
             "lore": [
-              "&7  You already bought this Item",
-              "&7  Right click to select"
+              "&a  SELECTED"
             ],
             "entchantments": [
               {
@@ -223,8 +222,7 @@
             "type": "STAINED_GLASS_PANE",
             "damage": 15,
             "lore": [
-              "&7  You already bought this Item",
-              "&7  Right click to select"
+              "&a  SELECTED"
             ],
             "entchantments": [
               {
@@ -350,8 +348,7 @@
             "type": "STAINED_GLASS_PANE",
             "damage": 15,
             "lore": [
-              "&7  You already bought this Item",
-              "&7  Right click to select"
+              "&a  SELECTED"
             ],
             "entchantments": [
               {
